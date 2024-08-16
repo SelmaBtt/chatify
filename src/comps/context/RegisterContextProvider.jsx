@@ -20,19 +20,17 @@ const RegisterContextProvider = (props) => {
     // To create account
 
     // Success or error messages useStates
-    const [succMsg, setSuccMsg] = ('');
+    const [succMsg, setSuccMsg] = useState('');
     const [errMsg, setErrMsg] = useState('');
 
     // Account values useStates
-    const [username, setUsername] = ('')
-    const [pass, setPass] = ('')
-    const [mail, setMail] = ('')
-    const [avatar, setAvatar] = ('')
+    const [username, setUsername] = useState('')
+    const [pass, setPass] = useState('')
+    const [mail, setMail] = useState('')
+    const [avatar, setAvatar] = useState('')
 
     const createAccBtn = async(e) => {
-        e.preventDefault();
         try {
-            setErrorMessage(false)
             const response = await fetch('https://chatify-api.up.railway.app/auth/register', {
                 method: 'POST',
                 headers: {"Content-type": "application/json"},
@@ -45,9 +43,9 @@ const RegisterContextProvider = (props) => {
                 })
             })
             if (response.ok) {
-                setSuccMsg(response.message)
+                setSuccMsg(response.message ? response.message : 'Your account has been created')
             } else {
-                throw new Error(response.error);
+                throw new Error(response.error ? response.error : 'Something went wrong!');
             }
         } catch (error) {
             setErrMsg(error)
@@ -56,11 +54,12 @@ const RegisterContextProvider = (props) => {
 
     return(
         <RegisterContext.Provider value={{ 
+            createAccBtn,
             succMsg, errMsg,
-            setUsername,
-            setPass,
-            setMail,
-            setAvatar,
+            username, setUsername,
+            pass, setPass,
+            mail, setMail,
+            avatar, setAvatar,
         }}>
             {props.children}
         </RegisterContext.Provider>
