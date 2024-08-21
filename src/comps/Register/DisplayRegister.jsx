@@ -1,15 +1,8 @@
 import { Link } from 'react-router-dom';
-import { useContext } from 'react';
-import { RegisterContext } from './context/RegisterContextProvider';
 
-const Register = () => {
-
-    const { createAccBtn,
-        succMsg, errMsg,
-        username, setUsername,
-        pass, setPass,
-        mail, setMail,
-        avatar, setAvatar, } = useContext(RegisterContext)
+const DisplayRegister = ({ 
+    createAccBtn, succMsg, errMsg, username, setUsername, pass, setPass, mail, setMail, avatar, setAvatar, 
+}) => {
     
     return(
         <>
@@ -55,4 +48,4 @@ const Register = () => {
     )
 }
 
-export default Register
+export default DisplayRegister;

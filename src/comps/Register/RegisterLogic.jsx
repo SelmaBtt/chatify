@@ -1,8 +1,7 @@
-import React, { createContext, useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
+import DisplayRegister from './DisplayRegister';
 
-export const RegisterContext = createContext();
-
-const RegisterContextProvider = (props) => {
+const RegisterLogic = () => {
 
     // To get the CSRF token
 
@@ -53,16 +52,17 @@ const RegisterContextProvider = (props) => {
     };
 
     return(
-        <RegisterContext.Provider value={{ 
-            createAccBtn,
-            succMsg, errMsg,
-            username, setUsername,
-            pass, setPass,
-            mail, setMail,
-            avatar, setAvatar,
-        }}>
-            {props.children}
-        </RegisterContext.Provider>
+        <>
+            <DisplayRegister 
+                createAccBtn={createAccBtn}
+                succMsg={succMsg} errMsg={errMsg}
+                username={username} setUsername={setUsername}
+                pass={pass} setPass={setPass}
+                mail={mail} setMail={setMail}
+                avatar={avatar} setAvatar={setAvatar}
+            />
+        </>
     )
-}
-export default RegisterContextProvider;
+};
+
+export default RegisterLogic;
