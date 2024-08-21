@@ -44,10 +44,10 @@ const RegisterLogic = () => {
             if (response.ok) {
                 setSuccMsg(response.message ? response.message : 'Your account has been created')
             } else {
-                throw new Error(response.error ? response.error : 'Something went wrong!');
+                setErrMsg(response.error ? response.error : 'Something went wrong!');
             }
         } catch (error) {
-            setErrMsg(error)
+            console.error('An error has occured', error);
         }
     };
 
