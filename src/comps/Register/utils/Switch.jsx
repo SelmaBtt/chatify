@@ -12,9 +12,9 @@ const Switch = () => {
                 <Route path='/register' element={<RegisterLogic />}></Route>
                 
                 {/* Protected routes */}
-                <Route element={}>
+                {/* <Route element={}>
                     
-                </Route>
+                </Route> */}
             </Routes>
         </>
     )
