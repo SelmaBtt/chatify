@@ -1,7 +1,7 @@
 import { Routes, Route } from 'react-router-dom';
-import LandingPage from './LandingPage';
-import LogIn from './LogIn';
-import RegisterLogic from './Register/RegisterLogic';
+import LandingPage from '../../LandingPage';
+import LogIn from '../../LogIn';
+import RegisterLogic from '../RegisterLogic';
 
 const Switch = () => {
     return(
@@ -10,6 +10,11 @@ const Switch = () => {
                 <Route path='/' exact element={<LandingPage />}></Route>
                 <Route path='/log-in' element={<LogIn />}></Route>
                 <Route path='/register' element={<RegisterLogic />}></Route>
+                
+                {/* Protected routes */}
+                <Route element={}>
+                    
+                </Route>
             </Routes>
         </>
     )

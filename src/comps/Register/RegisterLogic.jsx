@@ -8,7 +8,7 @@ const RegisterLogic = () => {
     const [csrf, setCsrf] = useState('')
 
     useEffect(() => {
-        fetch('https://chatify-api.up.railway.app/csrf', {
+        fetch(`${import.meta.env.VITE_API_URL}/csrf`, {
           method: 'PATCH',
         })
         .then(res => res.json())
@@ -30,7 +30,7 @@ const RegisterLogic = () => {
 
     const createAccBtn = async(e) => {
         try {
-            const response = await fetch('https://chatify-api.up.railway.app/auth/register', {
+            const response = await fetch(`${import.meta.env.VITE_API_URL}/auth/register`, {
                 method: 'POST',
                 headers: {"Content-type": "application/json"},
                 body: JSON.stringify({
@@ -44,7 +44,7 @@ const RegisterLogic = () => {
             if (response.ok) {
                 setSuccMsg(response.message ? response.message : 'Your account has been created')
             } else {
-                setErrMsg(response.error ? response.error : 'Something went wrong!');
+                setErrMsg(response.error ? response.error : 'Something went wrong. Try again later');
             }
         } catch (error) {
             console.error('An error has occured', error);

@@ -1,4 +1,4 @@
-import Switch from "./Switch"
+import Switch from "./Register/utils/Switch"
 
 
 function App() {
