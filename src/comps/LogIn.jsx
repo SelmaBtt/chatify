@@ -1,11 +1,20 @@
-import { Link } from 'react-router-dom';
-import { useContext } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import { useContext, useEffect } from 'react';
 import { LogInContext } from '../context/LogInContextProvider';
 
 const LogIn = () => {
     const { loginHandler, errMsg, jwtToken,
         username, setUsername,
-        pass, setPass, } = useContext(LogInContext)
+        pass, setPass, isAuth } = useContext(LogInContext)
+    
+    // To redirect the user to the chat 
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        if (isAuth) {
+            navigate('/chat');
+        }
+    }, [isAuth, navigate]);
 
     return(
         <>

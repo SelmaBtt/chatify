@@ -24,9 +24,8 @@ const LogInContextProvider = (props) => {
     const [username, setUsername] = useState('')
     const [pass, setPass] = useState('')
 
-    const [mail, setMail] = useState('')
-    const [avatar, setAvatar] = useState('')
-
+    // Check authentication
+    const [isAuth, setIsAuth] = useState((sessionStorage.getItem('isAuth') === 'true') || false)
 
     const loginHandler = async () => {
         try {
@@ -48,12 +47,18 @@ const LogInContextProvider = (props) => {
             }
 
             const data = await response.json();
+            // Save JWT
             setJwtToken(data.token);
+            sessionStorage.setItem('token', data.token);
+            // Save authentication values
+            setIsAuth(true);
+            sessionStorage.setItem('isAuth', true);
         } catch (error) {
             setErrMsg(error.message ? error.message : 'Something went wrong while trying to log in. Try again later');
         }
     };
 
+    // DELETE BEFORE UPLOADING
     useEffect(() => {
         if (jwtToken) {
             console.log('JWT Token:', jwtToken);
@@ -66,6 +71,7 @@ const LogInContextProvider = (props) => {
             loginHandler, errMsg, jwtToken,
             username, setUsername,
             pass, setPass,
+            isAuth,
         }}>
             {props.children}
         </LogInContext.Provider>
