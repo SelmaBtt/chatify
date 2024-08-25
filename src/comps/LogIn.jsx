@@ -3,7 +3,7 @@ import { useContext, useEffect } from 'react';
 import { LogInContext } from '../context/LogInContextProvider';
 
 const LogIn = () => {
-    const { loginHandler, errMsg, jwtToken,
+    const { loginHandler, errMsg,
         username, setUsername,
         pass, setPass, isAuth } = useContext(LogInContext)
     

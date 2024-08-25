@@ -68,7 +68,7 @@ const LogInContextProvider = (props) => {
 
     return(
         <LogInContext.Provider value={{ 
-            loginHandler, errMsg, jwtToken,
+            loginHandler, errMsg,
             username, setUsername,
             pass, setPass,
             isAuth,
