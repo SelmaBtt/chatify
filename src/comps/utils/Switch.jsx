@@ -3,7 +3,7 @@ import LandingPage from '../LandingPage';
 import LogIn from '../LogIn';
 import RegisterLogic from '../register/RegisterLogic';
 import ProtectedRoute from './ProtectedRoutes';
-import Chat from '../Chat';
+import Chat from '../chat/Chat';
 
 const Switch = () => {
     return(
