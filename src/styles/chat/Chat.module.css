@@ -1,0 +1,14 @@
+.mainContainer{
+    display: grid;
+    height: 100vh;
+    grid-template-areas: "side content";
+    grid-template-columns: 19vw auto;
+}
+
+.mainContainer > :first-child {
+    grid-area: side;
+}
+
+.mainContainer > :last-child {
+    grid-area: content;
+}
