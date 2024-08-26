@@ -4,11 +4,9 @@ import { DecodeJwtContext } from '../../context/DecodeJwtContextProvider';
 
 const Conversation = () => {
 
-    const { decodedJwt } = useContext(DecodeJwtContext)
-    if (!decodedJwt) {
-        return <p>Loading...</p>;
-    }
-    console.log(decodedJwt)
+    // const { decodedJwt } = useContext(DecodeJwtContext)
+    const jwt = sessionStorage.getItem("token");
+    const decodedJwt = JSON.parse(atob(jwt.split('.')[1]));
 
     // Fetching all messages
 
@@ -35,6 +33,11 @@ const Conversation = () => {
             console.error('There was a problem with your fetch operation:', error);
         });
     }, []);
+
+    // if (!decodedJwt) {
+    //     return <p>Loading...</p>;
+    // }
+    console.log(decodedJwt)
     
 
     return(
