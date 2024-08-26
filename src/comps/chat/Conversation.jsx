@@ -6,8 +6,9 @@ const Conversation = () => {
 
     const { decodedJwt } = useContext(DecodeJwtContext)
     if (!decodedJwt) {
-        return <p>Loading...</p>; // or some other loading indicator
+        return <p>Loading...</p>;
     }
+    console.log(decodedJwt)
 
     // Fetching all messages
 
@@ -46,7 +47,10 @@ const Conversation = () => {
             <div>
                 {messages.length > 0 ? (
                     messages.map((message, idx) => (
-                        <p key={idx}>{message.text}</p> 
+                        <>
+                            <h3>{decodedJwt.user}</h3>
+                            <p key={idx}>{message.text}</p> 
+                        </>
                     ))
                 ) : (
                     <p>No messages found.</p>
