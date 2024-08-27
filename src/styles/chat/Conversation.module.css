@@ -1,3 +1,27 @@
 .container{
     background-color: azure;
 }
+
+/* Modal window classes */
+.overlay{
+    background-color: black;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    opacity: 10%;
+    position: fixed;
+}
+
+.modal{
+    background-color: whitesmoke;
+    position: relative;
+    z-index: 1;
+}
+
+.openModal{
+    display: block;
+}
+.closedModal{
+    display: none;
+}

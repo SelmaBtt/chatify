@@ -7,7 +7,7 @@ const DecodeJwtContextProvider = (props) => {
     const [decodedJwt, setDecodedJwt] = useState(null);
 
     // useEffect(() => {
-    //     const jwt = sessionStorage.getItem("token");
+    //     const jwt = sessionStorage.getItem("token"); // undefined, null
     //     if (jwt) {
     //         const decodedToken = JSON.parse(atob(jwt.split('.')[1]));
     //         setDecodedJwt(decodedToken);

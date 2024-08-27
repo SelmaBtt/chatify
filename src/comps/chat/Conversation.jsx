@@ -1,19 +1,27 @@
 import { useContext, useState, useEffect, useRef } from 'react';
+import { useNavigate } from 'react-router-dom';
 import styles from '../../styles/chat/Conversation.module.css'
-import { DecodeJwtContext } from '../../context/DecodeJwtContextProvider';
+import { LogInContext } from '../../context/LogInContextProvider';
 import DOMPurify from "dompurify";
 
 const Conversation = () => {
 
-    // const { decodedJwt } = useContext(DecodeJwtContext)
-    const jwt = sessionStorage.getItem("token");
-    const decodedJwt = JSON.parse(atob(jwt.split('.')[1]));
+    const navigate = useNavigate();
+
+    const { decodedJwt, setIsAuth } = useContext(LogInContext)
 
     const [messages, setMessages] = useState([])
+    // const [isLoggedIn, setIsLoggedIn] = useState(true);
     
     const inputValue = useRef()
     const [sentMsg, setSentMsg] = useState(false); 
     const [delMsg, setDelMsg] = useState(false); 
+
+    // Handle modal window
+    const [isOpen, setIsOpen] = useState(false);
+    const toggleModal = () => setIsOpen(!isOpen); 
+
+
 
     // Fetching all messages
     
@@ -39,9 +47,6 @@ const Conversation = () => {
         });
     }, [sentMsg, delMsg]);
 
-    // if (!decodedJwt) {
-    //     return <p>Loading...</p>;
-    // }
     console.log(decodedJwt)
 
     // Post message
@@ -99,14 +104,30 @@ const Conversation = () => {
         });
     };
 
+    const logoutHandler = () => {
+        sessionStorage.clear();
+        setIsAuth(false)
+        navigate('/log-in');
+    }
+
     return(
         <div className={styles.container}>
             {/* Header section */}
+
             <header>
                 <p>{decodedJwt.user}</p>
-                <img src={decodedJwt.avatar} alt="profile picture" />
+                <img onClick={toggleModal} src={decodedJwt.avatar} alt="profile picture" />
+
+                <div className={isOpen ? `${styles.modal} ${styles.openModal}` : `${styles.modal} ${styles.closedModal}`}>
+                    <ul>
+                        <li>Settings</li>
+                        <li onClick={logoutHandler}>Log out</li>
+                    </ul>
+                </div>
+                {isOpen && <div className={styles.overlay} onClick={toggleModal}></div>}
             </header>
             <hr />
+
             {/* Messages section */}
             <div>
                 {(messages && messages.length > 0) ? (

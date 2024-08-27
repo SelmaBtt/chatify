@@ -18,7 +18,8 @@ const LogInContextProvider = (props) => {
 
     // Messages
     const [errMsg, setErrMsg] = useState('')
-    const [jwtToken, setJwtToken] = useState('')
+    const [jwtToken, setJwtToken] = useState('') // DELETE LATER?
+    const [decodedJwt, setDecodedJwt] = useState('')
 
     // Log in values
     const [username, setUsername] = useState('')
@@ -50,6 +51,9 @@ const LogInContextProvider = (props) => {
             // Save JWT
             setJwtToken(data.token);
             sessionStorage.setItem('token', data.token);
+            const decodedJwt = JSON.parse(atob(data.token.split('.')[1]));
+            setDecodedJwt(decodedJwt)
+            sessionStorage.setItem('decodedToken', decodedJwt);
             // Save authentication values
             setIsAuth(true);
             sessionStorage.setItem('isAuth', true);
@@ -71,7 +75,8 @@ const LogInContextProvider = (props) => {
             loginHandler, errMsg,
             username, setUsername,
             pass, setPass,
-            isAuth,
+            isAuth, decodedJwt,
+            setIsAuth
         }}>
             {props.children}
         </LogInContext.Provider>
