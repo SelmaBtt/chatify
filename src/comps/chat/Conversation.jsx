@@ -47,7 +47,7 @@ const Conversation = () => {
         });
     }, [sentMsg, delMsg]);
 
-    console.log(decodedJwt)
+    // console.log(decodedJwt)
 
     // Post message
 
@@ -132,11 +132,11 @@ const Conversation = () => {
             <div>
                 {(messages && messages.length > 0) ? (
                     messages.map((message, idx) => (
-                        <>
+                        <div key={idx}>
                             <h3>{decodedJwt.user}</h3>
-                            <p key={idx}>{message.text}</p> 
+                            <p>{message.text}</p> 
                             <button onClick={() => delMessagesHandler(message)}>↑ Delete message</button>
-                        </>
+                        </div>
                     ))
                 ) : (
                     <p>No messages found.</p>

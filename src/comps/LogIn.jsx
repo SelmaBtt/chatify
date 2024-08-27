@@ -16,6 +16,12 @@ const LogIn = () => {
         }
     }, [isAuth, navigate]);
 
+    const handleKeyDown = (e) => {
+        if (e.key === 'Enter') {
+            loginHandler();
+        }
+    };
+
     return(
         <>
             <Link to={'/'}>Home</Link>  
@@ -28,6 +34,7 @@ const LogIn = () => {
                 type="text" 
                 value={pass}
                 onChange={(e) => { setPass(e.target.value) }} 
+                onKeyDown={handleKeyDown}
             />
             <button onClick={loginHandler}>Log in</button>
 
