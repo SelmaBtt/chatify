@@ -13,6 +13,7 @@ const Conversation = () => {
     
     const inputValue = useRef()
     const [sentMsg, setSentMsg] = useState(false); 
+    const [delMsg, setDelMsg] = useState(false); 
 
     // Fetching all messages
     
@@ -36,7 +37,7 @@ const Conversation = () => {
         .catch(error => {
             console.error('There was a problem with your fetch operation:', error);
         });
-    }, [sentMsg]);
+    }, [sentMsg, delMsg]);
 
     // if (!decodedJwt) {
     //     return <p>Loading...</p>;
@@ -76,6 +77,28 @@ const Conversation = () => {
         };
     };
 
+    const delMessagesHandler = (message) => {
+        fetch(`${import.meta.env.VITE_API_URL}/messages/${message.id}`, {
+            method: 'DELETE',
+            headers: {
+                Authorization: `Bearer ${sessionStorage.getItem("token")}`, 
+                'Content-Type': 'application/json',
+            },
+        })
+        .then(response => {
+            if (!response.ok) {
+                console.error('Problem with deleting new message');
+            }
+            return response.json();
+        })
+        .then(data => {
+            setDelMsg(prev => !prev);
+        })
+        .catch(error => {
+            console.error('There was a problem with your fetch operation:', error);
+        });
+    };
+
     return(
         <div className={styles.container}>
             {/* Header section */}
@@ -91,6 +114,7 @@ const Conversation = () => {
                         <>
                             <h3>{decodedJwt.user}</h3>
                             <p key={idx}>{message.text}</p> 
+                            <button onClick={() => delMessagesHandler(message)}>↑ Delete message</button>
                         </>
                     ))
                 ) : (
