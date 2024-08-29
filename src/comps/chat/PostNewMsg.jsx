@@ -28,7 +28,7 @@ const PostNewMsg = ({ setSentMsg }) => {
             })
             .then(data => {
                 setSentMsg(prev => !prev);
-                inputValue.current.value = ""
+                inputValue.current.value = "";
             })
             .catch(error => {
                 console.error('There was a problem with your fetch operation:', error);

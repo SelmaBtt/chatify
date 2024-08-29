@@ -18,7 +18,7 @@ const LogInContextProvider = (props) => {
 
     // Messages
     const [errMsg, setErrMsg] = useState('')
-    const [jwtToken, setJwtToken] = useState('') // DELETE LATER?
+    const [jwtToken, setJwtToken] = useState('')
     const [decodedJwt, setDecodedJwt] = useState('')
 
     // Log in values
@@ -59,13 +59,13 @@ const LogInContextProvider = (props) => {
             sessionStorage.setItem('isAuth', true);
         } catch (error) {
             setErrMsg(error.message ? error.message : 'Something went wrong while trying to log in. Try again later');
+            console.error(`Error: ${error}`)
         }
     };
 
-    // DELETE BEFORE UPLOADING
     useEffect(() => {
         if (jwtToken) {
-            console.log('JWT Token:', jwtToken);
+            console.log(`[${new Date(). toISOString()}] Log in Success for user: ${decodedJwt.id}`);
         }
     }, [jwtToken]);
 
