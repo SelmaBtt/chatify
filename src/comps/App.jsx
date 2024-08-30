@@ -17,7 +17,6 @@ Sentry.init({
 });
 
 
-
 function App() {
   return (
     <>

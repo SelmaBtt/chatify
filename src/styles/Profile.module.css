@@ -1,0 +1,12 @@
+.updateWindow{
+    background-color: whitesmoke;
+    position: relative;
+    z-index: 1;
+}
+
+.openUpdateWindow{
+    display: block;
+}
+.closedUpdateWindow{
+    display: none;
+}

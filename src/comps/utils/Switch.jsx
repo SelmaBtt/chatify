@@ -4,6 +4,7 @@ import LogIn from '../LogIn';
 import RegisterLogic from '../register/RegisterLogic';
 import ProtectedRoute from './ProtectedRoutes';
 import Chat from '../chat/Chat';
+import Profile from '../Profile';
 
 const Switch = () => {
     return(
@@ -16,6 +17,7 @@ const Switch = () => {
                 {/* Protected routes */}
                 <Route element={<ProtectedRoute />}>
                     <Route path='/chat' element={<Chat />} />
+                    <Route path='/profile' element={<Profile />} />
                 </Route>
             </Routes>
         </>

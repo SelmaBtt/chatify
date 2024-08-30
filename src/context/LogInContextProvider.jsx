@@ -18,12 +18,14 @@ const LogInContextProvider = (props) => {
 
     // Messages
     const [errMsg, setErrMsg] = useState('')
-    const [jwtToken, setJwtToken] = useState('')
-    const [decodedJwt, setDecodedJwt] = useState('')
+    const [jwtToken, setJwtToken] = useState(sessionStorage.getItem('token') || '')
+    const [decodedJwt, setDecodedJwt] = useState(JSON.parse(sessionStorage.getItem('decodedToken')) || '')
 
-    // Log in values
-    const [username, setUsername] = useState('')
-    const [pass, setPass] = useState('')
+    // User values
+    const [username, setUsername] = useState(decodedJwt.user || '')
+    const [email, setEmail] = useState(decodedJwt.email || '')
+    const [pass, setPass] = useState(decodedJwt.password || '')
+    const [avatar, setAvatar] = useState(decodedJwt.avatar || '')
 
     // Check authentication
     const [isAuth, setIsAuth] = useState((sessionStorage.getItem('isAuth') === 'true') || false)
@@ -53,7 +55,8 @@ const LogInContextProvider = (props) => {
             sessionStorage.setItem('token', data.token);
             const decodedJwt = JSON.parse(atob(data.token.split('.')[1]));
             setDecodedJwt(decodedJwt)
-            sessionStorage.setItem('decodedToken', decodedJwt);
+            sessionStorage.setItem('decodedToken', JSON.stringify(decodedJwt));
+            console.log(decodedJwt) 
             // Save authentication values
             setIsAuth(true);
             sessionStorage.setItem('isAuth', true);
@@ -72,11 +75,13 @@ const LogInContextProvider = (props) => {
 
     return(
         <LogInContext.Provider value={{ 
+            decodedJwt, setDecodedJwt,
             loginHandler, errMsg,
             username, setUsername,
+            email, setEmail,
             pass, setPass,
-            isAuth, decodedJwt,
-            setIsAuth
+            avatar, setAvatar,
+            isAuth, setIsAuth,
         }}>
             {props.children}
         </LogInContext.Provider>
