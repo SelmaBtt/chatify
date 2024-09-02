@@ -1,12 +1,14 @@
-import styles from '../../styles/Chat/AllChats.module.css'
-import { useState } from 'react';
+import styles from '../../styles/Chat/Sidebar.module.css'
+import { useState, useEffect, useContext } from 'react';
+import { LogInContext } from '../../context/LogInContextProvider';
+import { UsersContext } from '../../context/UsersContextProvider';
 
-const AllChats = () => {
-    // PUT A USEEFFECT OR SOMETHING SO IT CAN REGENERATE 
-    const guid = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, c => (c === 'x' ? Math.floor(Math.random() * 16) : (Math.floor(Math.random() * 4) + 8)).toString(16));
 
-    const [users, setUsers] = useState([]);
 
+const SideBar = () => {
+    const { decodedJwt } = useContext(LogInContext);
+    const { users, isInviteResponse, getAllUsers, inviteHandler } = useContext(UsersContext)
+    
     const [searchValue, setSearchValue] = useState('');
     const [searchedUsers, setSearchedUsers] = useState([]);
 
@@ -22,64 +24,14 @@ const AllChats = () => {
         setIsOpen(!isOpen);
         setSearchValue('');
         setSearchedUsers([]);
-    }
-
-    // Get all users
-    const getAllUsers = () => {
-        fetch(import.meta.env.VITE_API_URL + '/users', {
-            method: 'GET',
-            headers: {
-                Authorization: `Bearer ${sessionStorage.getItem("token")}`, 
-                'Content-Type': 'application/json',
-            },
-        })
-        .then(response => {
-            if (!response.ok) {
-                console.error('Network response was not ok');
-            }
-            return response.json();
-        })
-        .then(data => {
-            setUsers(data)
-            toggleSearch()
-        })
-        .catch(error => {
-            console.error('There was a problem with your fetch operation:', error);
-        })
-    }
-
-    const inviteHandler = (userId) => {
-        console.log(userId)
-
-        // fetch(`${import.meta.env.VITE_API_URL}/invite/${userId}`, {
-        //     method: 'POST',
-        //     headers: {
-        //         Authorization: `Bearer ${sessionStorage.getItem("token")}`, 
-        //         'Content-Type': 'application/json',
-        //     },
-        //     body: JSON.stringify({
-        //         conversationId: guid,
-        //     })
-        // })
-        // .then(response => {
-        //     if (!response.ok) {
-        //         console.error('Problem with inviting user');
-        //     }
-        //     return response.json();
-        // })
-        // .then(data => {
-        // })
-        // .catch(error => {
-        //     console.error('There was a problem with your fetch operation:', error);
-        // });
-        // .finally (() => {
-        //     toggleSearch();
-        //     setSearchValue('');
-        //     setSearchedUsers([]);
-        // })
     };
 
     // To be able to search for specific user
+    const handleKeyDown = (e) => {
+        if (e.key === 'Enter') {
+            searchHandler();
+        }
+    };
     const searchHandler = () => {
         if (users && users.length > 0) {
             const filteredUsers = users.filter(user =>
@@ -89,8 +41,17 @@ const AllChats = () => {
         }
     }
 
+    const inviteArray = JSON.parse(decodedJwt.invite);
+
     return(
         <div className={styles.container}>
+
+            {isInviteResponse && 
+                <div>
+                    <p>Invite sent!</p>
+                </div>
+            }
+
             <h1>Chatify</h1>
             <button onClick={btnHandler}>
                 <h2>{isOpen ? "Close" : "Add user"}</h2>
@@ -101,6 +62,7 @@ const AllChats = () => {
                     type="text" 
                     value={searchValue}
                     onChange={(e) => { setSearchValue(e.target.value) }} 
+                    onKeyDown={handleKeyDown}
                 />
                 <button onClick={searchHandler}>Search</button>
                 
@@ -122,9 +84,20 @@ const AllChats = () => {
                 )}
 
             </div>
-            <h2>Your chats</h2>
+            
+            <div>
+                <h2>Your chats</h2>
+                {Array.isArray(inviteArray) && inviteArray.length > 0 &&
+                    inviteArray.map((invite, idx) => (
+                        <div key={idx}>
+                            <p>{invite.username}</p>
+                        </div>
+                    ))
+                }
+            </div>
+            
         </div>
     )
 };
 
-export default AllChats;
+export default SideBar;

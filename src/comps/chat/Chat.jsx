@@ -1,11 +1,11 @@
-import AllChats from "./AllChats";
+import Sidebar from "./SideBar";
 import Conversation from "./Conversation";
 import styles from '../../styles/chat/Chat.module.css'
 
 const Chat = () => {
     return(
         <div className={styles.mainContainer}>
-            <AllChats />
+            <Sidebar />
             <Conversation />
         </div>
     )
