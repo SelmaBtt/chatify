@@ -1,14 +1,16 @@
 import { useContext, useEffect, useState } from 'react';
 import { LogInContext } from '../../context/LogInContextProvider';
+import { UsersContext } from '../../context/UsersContextProvider';
 
 const MapAllMsg = ({ sentMsg, delMsg, setDelMsg }) => {
     const { decodedJwt } = useContext(LogInContext);
+    const { conversationDetails } = useContext(UsersContext);
 
     const [messages, setMessages] = useState([]);
 
     // Get all messages logic
     useEffect(() => {
-        fetch(import.meta.env.VITE_API_URL + '/messages', {
+        fetch(import.meta.env.VITE_API_URL + '/messages?conversationId=' + conversationDetails.conversationId, {
             method: 'GET',
             headers: {
                 Authorization: `Bearer ${sessionStorage.getItem("token")}`, 

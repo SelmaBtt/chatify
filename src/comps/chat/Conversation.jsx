@@ -11,11 +11,6 @@ const Conversation = () => {
 
     return(
         <div className={styles.container}>
-            {/* Header section */}
-            <ChatsHeader />
-            
-            <hr />
-
             {/* Messages section */}
             <MapAllMsg sentMsg={sentMsg} delMsg={delMsg} setDelMsg={setDelMsg} />
 

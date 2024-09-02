@@ -3,7 +3,7 @@ import LandingPage from '../LandingPage';
 import LogIn from '../LogIn';
 import RegisterLogic from '../register/RegisterLogic';
 import ProtectedRoute from './ProtectedRoutes';
-import Chat from '../chat/Chat';
+import ChatApp from '../chat/ChatApp';
 import Profile from '../Profile';
 
 const Switch = () => {
@@ -16,7 +16,7 @@ const Switch = () => {
                 
                 {/* Protected routes */}
                 <Route element={<ProtectedRoute />}>
-                    <Route path='/chat' element={<Chat />} />
+                    <Route path='/chat' element={<ChatApp />} />
                     <Route path='/profile' element={<Profile />} />
                 </Route>
             </Routes>

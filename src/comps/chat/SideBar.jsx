@@ -5,9 +5,9 @@ import { UsersContext } from '../../context/UsersContextProvider';
 
 
 
-const SideBar = () => {
+const SideBar = ({ setShowConversation }) => {
     const { decodedJwt } = useContext(LogInContext);
-    const { users, isInviteResponse, getAllUsers, inviteHandler } = useContext(UsersContext)
+    const { users, isInviteResponse, getAllUsers, inviteHandler, invitationDetailsHandler } = useContext(UsersContext)
     
     const [searchValue, setSearchValue] = useState('');
     const [searchedUsers, setSearchedUsers] = useState([]);
@@ -41,7 +41,13 @@ const SideBar = () => {
         }
     }
 
+    // To make the decodedJwt, which is a string, to a array 
     const inviteArray = JSON.parse(decodedJwt.invite);
+
+    const openConvoHanlder = (convoInfo) => {
+        invitationDetailsHandler(convoInfo);
+        setShowConversation(true);
+    }
 
     return(
         <div className={styles.container}>
@@ -84,16 +90,20 @@ const SideBar = () => {
                 )}
 
             </div>
+
+            {Array.isArray(inviteArray) && inviteArray.length > 0 &&
+                <div>
+                    <h2>Invitations</h2>
+                    {inviteArray.map((invite, idx) => (
+                        <div key={idx} onClick={() => {openConvoHanlder(invite)}}>
+                            <p>{invite.username}</p>
+                        </div>
+                    ))}
+                </div>
+            }
             
             <div>
                 <h2>Your chats</h2>
-                {Array.isArray(inviteArray) && inviteArray.length > 0 &&
-                    inviteArray.map((invite, idx) => (
-                        <div key={idx}>
-                            <p>{invite.username}</p>
-                        </div>
-                    ))
-                }
             </div>
             
         </div>

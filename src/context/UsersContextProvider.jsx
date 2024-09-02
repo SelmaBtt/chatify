@@ -8,7 +8,9 @@ const UsersContextProvider = (props) => {
 
     const [users, setUsers] = useState([]);
 
-    const [isInviteResponse, setIsInviteResponse] = useState(false)
+    const [isInviteResponse, setIsInviteResponse] = useState(false);
+
+    const [conversationDetails, setConversationDetails] = useState(sessionStorage.getItem('conversationInfo') || '');
 
     // Generate GUID
     useEffect(() => {
@@ -70,8 +72,9 @@ const UsersContextProvider = (props) => {
             return response.json();
         })
         .then(() => {
+            setIsInviteResponse(true);
             setTimeout(() => {
-                setIsInviteResponse(true);
+                setIsInviteResponse(false);
             }, 3000);
         })
         .catch(error => {
@@ -83,11 +86,24 @@ const UsersContextProvider = (props) => {
         })
     };
 
+    const invitationDetailsHandler = (convoDetails) => {
+        setConversationDetails(convoDetails)
+
+        // console log the values before sessisonStorage
+        console.log(conversationDetails)
+        console.log(typeof(convoDetails))
+
+        // console log the values after sessisonStorage
+        sessionStorage.setItem('conversationDetails', JSON.stringify(convoDetails));
+        console.log('Stored conversationDetails:', sessionStorage.getItem("conversationDetails"));
+    };
+
     return(
         <UsersContext.Provider value={{ 
             users, isInviteResponse,
-            getAllUsers, inviteHandler
-
+            getAllUsers, inviteHandler, 
+            conversationDetails, setConversationDetails,
+            invitationDetailsHandler
         }}>
             {props.children}
         </UsersContext.Provider>
