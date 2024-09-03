@@ -43,6 +43,7 @@ const ConversationContextProvider = (props) => {
 
         setConversationId(conversationId);
         setShowConversation(true);
+        console.log(conversationId)
     };
 
     // Del messages function

@@ -1,0 +1,17 @@
+.messageWrapper{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.myMessages {
+    align-self: flex-end;
+    background-color: lemonchiffon;
+    padding: 10px;
+    border-radius: 8px;
+}
+
+.yourMessages {
+    align-self: flex-start; 
+    background-color: floralwhite;
+}
