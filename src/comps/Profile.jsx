@@ -9,13 +9,21 @@ const Profile = () => {
         username, setUsername,
         email, setEmail,
         pass, setPass,
-        avatar, setAvatar } = useContext(LogInContext);
+        avatar, setAvatar,
+        setIsAuth, setShowConversation } = useContext(LogInContext);
 
     const [errMsg, setErrMsg] = useState('')
 
+    const [isOpenUpdate, setIsOpenUpdate] = useState(false);
+    const [isOpenDel, setIsOpenDel] = useState(false);
+
+    const [confirmDel, setConfirmDel] = useState('')
+
     // Handle update ui
-    const [isOpen, setIsOpen] = useState(false);
-    const toggleModal = () => setIsOpen(!isOpen); 
+    const toggleModal = () => setIsOpenUpdate(!isOpenUpdate); 
+
+    // Handle delete ui
+    const toggleDeleteMessage = () => setIsOpenDel(!isOpenDel); 
 
     // To redirect the user back to the chat component
     const navigate = useNavigate();
@@ -64,6 +72,34 @@ const Profile = () => {
         })
     };
 
+    const delAccountHandler = () => {
+        fetch(`${import.meta.env.VITE_API_URL}/users/${decodedJwt.id}`, {
+            method: 'DELETE',
+            headers: {
+                Authorization: `Bearer ${sessionStorage.getItem("token")}`, 
+                'Content-Type': 'application/json',
+            },
+        })
+        .then(response => {
+            if (!response.ok) {
+                console.error('Problem with deleting your account');
+            }
+            return response.json();
+        })
+        .then(data => {
+            setConfirmDel(data.message ? data.message : 'Your account has been deleted')
+            setTimeout(() => {
+                sessionStorage.clear();
+                setIsAuth(false)
+                setShowConversation(false)
+                navigate('/log-in')
+            }, 1500);
+        })
+        .catch(error => {
+            console.error('There was a problem with your fetch operation:', error);
+        });
+    };
+
     return(
         <>
             <div>
@@ -75,9 +111,9 @@ const Profile = () => {
                 <p>E-mail: {decodedJwt.email}</p>
 
                 <button onClick={toggleModal}>
-                    {isOpen ? "Close" : "Update your profile"}
+                    {isOpenUpdate ? "Close" : "Update your profile"}
                 </button>
-                <div className={isOpen ? `${styles.updateWindow} ${styles.openUpdateWindow}` : `${styles.updateWindow} ${styles.closedUpdateWindow}`}>
+                <div className={isOpenUpdate ? `${styles.updateWindow} ${styles.openUpdateWindow}` : `${styles.updateWindow} ${styles.closedUpdateWindow}`}>
                     <p>Username</p>
                     <input 
                         type="text"
@@ -98,6 +134,21 @@ const Profile = () => {
                     />
                     <button onClick={updateUserHandler}>Submit changes</button>
                 </div>
+
+                <button onClick={toggleDeleteMessage}>Delete Account</button>
+
+                <div className={isOpenDel ? `${styles.delWindow} ${styles.openDelWindow}` : `${styles.delWindow} ${styles.closedDelWindow}`}>
+                    <button onClick={toggleDeleteMessage}>
+                        Close
+                    </button>
+                    <h2>You're about to delete your account!</h2>
+                    <p>Are you sure you want to delete your account?</p>
+                    <button onClick={delAccountHandler}>Yes</button>
+                    <button onClick={toggleDeleteMessage}>No</button>
+                    <p>{confirmDel}</p>
+                </div>
+
+                {isOpenDel && <div className={styles.overlay} onClick={toggleDeleteMessage}></div>}
             </div>
         </>
     )

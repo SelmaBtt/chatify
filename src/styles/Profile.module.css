@@ -1,3 +1,4 @@
+/* Update window */
 .updateWindow{
     background-color: whitesmoke;
     position: relative;
@@ -9,4 +10,28 @@
 }
 .closedUpdateWindow{
     display: none;
+}
+
+/* Delete window */
+.delWindow{
+    background-color: honeydew;
+    z-index: 1;
+    position: relative;
+}
+
+.openDelWindow{
+    display: block;
+}
+.closedDelWindow{
+    display: none;
+}
+
+.overlay{
+    background-color: black;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    opacity: 10%;
+    position: fixed;
 }
