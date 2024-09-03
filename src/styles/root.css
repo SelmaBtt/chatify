@@ -1,1 +1,29 @@
-* {margin: 0;}
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@700&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+
+:root{
+    /* Colors */
+    --accent-black: #14141F;
+    --main-black: #262631;
+    --main-accent: #D36135;
+    --secondary-accent: #B19CE8;
+    --button-color: #98A886;
+    --font-color: #FFFFFF;
+
+    /* Fonts */
+    --main-font: "Inter", sans-serif;
+    --title-font: "Fredoka", sans-serif;
+
+    /* Default values */
+    --border-radius: 29px;
+    --h1-size: 48px;
+    --h2-size: 23px;
+    --big-text: 19px;
+    --text: 16px
+}   
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}

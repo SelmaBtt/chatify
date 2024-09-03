@@ -73,21 +73,14 @@ const SideBar = () => {
                 <button onClick={searchHandler}>Search</button>
                 
                 {/* Display users */}
-                {(searchedUsers && searchedUsers.length > 0) ? (
+                {searchedUsers && searchedUsers.length > 0 &&
                     searchedUsers.map((searchedUser, idx) => (
                         <div key={idx}>
                             <p>{searchedUser.username}</p>
                             <button onClick={() => inviteHandler(searchedUser.userId)}>Invite user</button>
                         </div>
                     ))
-                ) : (
-                    users.map((user, idx) => (
-                        <div key={idx}>
-                            <p>{user.username}</p>
-                            <button onClick={() => inviteHandler(user.userId)}>Invite user</button>
-                        </div>
-                    ))
-                )}
+                }
 
             </div>
 

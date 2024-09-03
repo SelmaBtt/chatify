@@ -1,0 +1,27 @@
+.container{
+    height: 100vh;
+    display: flex;
+}
+
+.contentWrapper{
+    width: 61.2vw;
+    height: 75.9vh;
+    margin: auto auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.contentWrapper h1{color: var(--font-color);}
+
+.contentWrapper hr{
+    width: 69.5%;
+    margin: 40px 0;
+}
+
+.btnWrapper{
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+}
