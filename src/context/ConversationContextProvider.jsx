@@ -5,6 +5,8 @@ export const ConversationContext = createContext();
 
 const ConversationContextProvider = (props) => {
     const [allConversations, setAllConversations] = useState([])
+    const [conversationId, setConversationId] = useState(null)
+    const [showConversation, setShowConversation] = useState(false)
     
     const [sentMsg, setSentMsg] = useState(false); 
     const [delMsg, setDelMsg] = useState(false);
@@ -13,7 +15,7 @@ const ConversationContextProvider = (props) => {
     const inputValue = useRef()
 
     // Get all conversations (conversationIds)
-    useEffect(() => {
+    const getConversations = () => {
         fetch(`${import.meta.env.VITE_API_URL}/conversations`, {
             method: 'GET',
             headers: {
@@ -28,35 +30,20 @@ const ConversationContextProvider = (props) => {
             return response.json();
         })
         .then(data => {
-            setAllConversations(data)
+            setAllConversations(data);
         })
         .catch(error => {
             console.error('There was a problem with your fetch operation:', error);
         })
-    }), [];
+    };
 
-    // Get all messages logic
-    useEffect(() => {
-        fetch(`${import.meta.env.VITE_API_URL}/messages?conversationId=${allConversations}`, {
-            method: 'GET',
-            headers: {
-                Authorization: `Bearer ${sessionStorage.getItem("token")}`, 
-                'Content-Type': 'application/json',
-            },
-        })
-        .then(response => {
-            if (!response.ok) {
-                console.error('Network response was not ok');
-            }
-            return response.json();
-        })
-        .then(data => {
-            setMessages(data);
-        })
-        .catch(error => {
-            console.error('There was a problem with your fetch operation:', error);
-        });
-    }, [sentMsg, delMsg]);
+    const selectConversation = (conversationId) => {
+        // TODO: fetch mot GET /messages?conversationId=${conversationId}
+        // TODO: ersätt/uppdatera messages med resultatet av ovanstående fetch
+
+        setConversationId(conversationId);
+        setShowConversation(true);
+    };
 
     // Del messages function
     const delMessagesHandler = (message) => {
@@ -73,7 +60,7 @@ const ConversationContextProvider = (props) => {
             }
             return response.json();
         })
-        .then(data => {
+        .then(() => {
             setDelMsg(prev => !prev);
         })
         .catch(error => {
@@ -87,7 +74,8 @@ const ConversationContextProvider = (props) => {
             const newMessage = DOMPurify.sanitize(inputValue.current.value);
             console.log(newMessage)
 
-            fetch(`${import.meta.env.VITE_API_URL}/messages?conversationId=${allConversations}`, {
+            // TODO: gör om nedanstående för query param finns bara för GET /messages
+            fetch(`${import.meta.env.VITE_API_URL}/messages?conversationId=${conversationId}`, {
                 method: 'POST',
                 headers: {
                     Authorization: `Bearer ${sessionStorage.getItem("token")}`, 
@@ -95,7 +83,7 @@ const ConversationContextProvider = (props) => {
                 },
                 body: JSON.stringify({
                     text: newMessage,
-                    conversationId: allConversations
+                    conversationId: conversationId
                 })
             })
             .then(response => {
@@ -116,12 +104,16 @@ const ConversationContextProvider = (props) => {
 
     return(
         <ConversationContext.Provider value={{ 
-            allConversations, 
+            allConversations,
+            conversationId, setConversationId,
+            getConversations,
+            selectConversation,
+            showConversation, setShowConversation, 
             sentMsg, setSentMsg,
             delMsg, setDelMsg,
             messages, setMessages,
             delMessagesHandler,
-            inputValue, newMessageHandler
+            inputValue, newMessageHandler,
         }}>
             {props.children}
         </ConversationContext.Provider>

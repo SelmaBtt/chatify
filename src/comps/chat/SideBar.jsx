@@ -1,13 +1,14 @@
 import styles from '../../styles/Chat/Sidebar.module.css'
-import { useState, useEffect, useContext } from 'react';
+import { useState, useContext } from 'react';
 import { LogInContext } from '../../context/LogInContextProvider';
 import { UsersContext } from '../../context/UsersContextProvider';
+import { ConversationContext } from '../../context/ConversationContextProvider';
 
 
-
-const SideBar = ({ setShowConversation }) => {
+const SideBar = () => {
     const { decodedJwt } = useContext(LogInContext);
-    const { users, isInviteResponse, allConversations, getAllUsers, inviteHandler, invitationDetailsHandler } = useContext(UsersContext)
+    const { users, isInviteResponse, getAllUsers, inviteHandler, invitationDetailsHandler } = useContext(UsersContext)
+    const { setShowConversation, allConversations, selectConversation } = useContext(ConversationContext)
     
     const [searchValue, setSearchValue] = useState('');
     const [searchedUsers, setSearchedUsers] = useState([]);
@@ -44,8 +45,8 @@ const SideBar = ({ setShowConversation }) => {
     // To make the decodedJwt, which is a string, to a array 
     const inviteArray = JSON.parse(decodedJwt.invite);
 
-    const openConvoHanlder = (inviteInfo) => {
-        invitationDetailsHandler(inviteInfo);
+    const openConvoHanlder = (convo) => {
+        selectConversation(convo)
         setShowConversation(true);
     }
 
@@ -95,7 +96,7 @@ const SideBar = ({ setShowConversation }) => {
                 <div>
                     <h2>Invitations</h2>
                     {inviteArray.map((invite, idx) => (
-                        <div key={idx} onClick={() => {openConvoHanlder(invite)}}>
+                        <div key={idx} onClick={() => {openConvoHanlder(invite.conversationId)}}>
                             <p>{invite.username}</p>
                         </div>
                     ))}
@@ -104,9 +105,10 @@ const SideBar = ({ setShowConversation }) => {
             
             <div>
                 <h2>Your chats</h2>
-                
+                {allConversations.map((conv, idx) => (
+                    <div key={idx} onClick={() => openConvoHanlder(conv)}>Konversation {idx + 1}</div>
+                ))}
             </div>
-            
         </div>
     )
 };

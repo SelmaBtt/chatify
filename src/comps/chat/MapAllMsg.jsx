@@ -1,12 +1,33 @@
-import { useContext, useEffect, useState } from 'react';
+import { useContext, useEffect } from 'react';
 import { LogInContext } from '../../context/LogInContextProvider';
-import { UsersContext } from '../../context/UsersContextProvider';
 import { ConversationContext } from '../../context/ConversationContextProvider';
 
 const MapAllMsg = () => {
     const { decodedJwt } = useContext(LogInContext);
-    const { conversationDetails } = useContext(UsersContext);
-    const { delMsg, setDelMsg, messages, setMessages, delMessagesHandler } = useContext(ConversationContext);
+    const { conversationId, messages, setMessages, delMessagesHandler, sentMsg, delMsg, } = useContext(ConversationContext);
+
+    // Get all messages logic
+    useEffect(() => {
+        fetch(`${import.meta.env.VITE_API_URL}/messages?conversationId=${conversationId}`, {
+            method: 'GET',
+            headers: {
+                Authorization: `Bearer ${sessionStorage.getItem("token")}`, 
+                'Content-Type': 'application/json',
+            },
+        })
+        .then(response => {
+            if (!response.ok) {
+                console.error('Network response was not ok');
+            }
+            return response.json();
+        })
+        .then(data => {
+            setMessages(data);
+        })
+        .catch(error => {
+            console.error('There was a problem with your fetch operation:', error);
+        });
+    }, [sentMsg, delMsg, conversationId]);
 
     return(
         <div>

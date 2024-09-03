@@ -86,6 +86,7 @@ const UsersContextProvider = (props) => {
         })
     };
 
+    // IS THIS NEEDED?
     const invitationDetailsHandler = (convoDetails) => {
         setConversationDetails(convoDetails)
 
@@ -94,8 +95,8 @@ const UsersContextProvider = (props) => {
 
         // console log the values after sessisonStorage
         // IS THIS NEEDED?
-        sessionStorage.setItem('conversationDetails', JSON.stringify(convoDetails));
-        console.log('Stored conversationDetails:', sessionStorage.getItem("conversationDetails"));
+        // sessionStorage.setItem('conversationDetails', JSON.stringify(convoDetails));
+        // console.log('Stored conversationDetails:', sessionStorage.getItem("conversationDetails"));
     };
 
     return(

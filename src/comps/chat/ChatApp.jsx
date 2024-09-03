@@ -3,14 +3,15 @@ import ChatLandingPage from "./ChatLandingPage";
 import Conversation from "./Conversation";
 import styles from '../../styles/chat/ChatApp.module.css'
 import ChatsHeader from "./ChatsHeader";
-import { useState } from "react";
+import { useContext } from "react";
+import { ConversationContext } from "../../context/ConversationContextProvider";
 
 const ChatApp = () => {
-    const [showConversation, setShowConversation] = useState(false)
+    const { showConversation } = useContext(ConversationContext)
 
     return(
         <div className={styles.mainContainer}>
-            <Sidebar setShowConversation={setShowConversation} />
+            <Sidebar />
             <div>
                 <ChatsHeader />
                 <hr />
