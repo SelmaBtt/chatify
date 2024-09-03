@@ -91,9 +91,9 @@ const UsersContextProvider = (props) => {
 
         // console log the values before sessisonStorage
         console.log(conversationDetails)
-        console.log(typeof(convoDetails))
 
         // console log the values after sessisonStorage
+        // IS THIS NEEDED?
         sessionStorage.setItem('conversationDetails', JSON.stringify(convoDetails));
         console.log('Stored conversationDetails:', sessionStorage.getItem("conversationDetails"));
     };
@@ -101,6 +101,7 @@ const UsersContextProvider = (props) => {
     return(
         <UsersContext.Provider value={{ 
             users, isInviteResponse,
+            // allConversations,
             getAllUsers, inviteHandler, 
             conversationDetails, setConversationDetails,
             invitationDetailsHandler

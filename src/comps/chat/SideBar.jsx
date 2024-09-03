@@ -7,7 +7,7 @@ import { UsersContext } from '../../context/UsersContextProvider';
 
 const SideBar = ({ setShowConversation }) => {
     const { decodedJwt } = useContext(LogInContext);
-    const { users, isInviteResponse, getAllUsers, inviteHandler, invitationDetailsHandler } = useContext(UsersContext)
+    const { users, isInviteResponse, allConversations, getAllUsers, inviteHandler, invitationDetailsHandler } = useContext(UsersContext)
     
     const [searchValue, setSearchValue] = useState('');
     const [searchedUsers, setSearchedUsers] = useState([]);
@@ -44,8 +44,8 @@ const SideBar = ({ setShowConversation }) => {
     // To make the decodedJwt, which is a string, to a array 
     const inviteArray = JSON.parse(decodedJwt.invite);
 
-    const openConvoHanlder = (convoInfo) => {
-        invitationDetailsHandler(convoInfo);
+    const openConvoHanlder = (inviteInfo) => {
+        invitationDetailsHandler(inviteInfo);
         setShowConversation(true);
     }
 
@@ -104,6 +104,7 @@ const SideBar = ({ setShowConversation }) => {
             
             <div>
                 <h2>Your chats</h2>
+                
             </div>
             
         </div>

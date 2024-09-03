@@ -5,17 +5,13 @@ import PostNewMsg from './PostNewMsg';
 import MapAllMsg from './MapAllMsg';
 
 const Conversation = () => {
-
-    const [sentMsg, setSentMsg] = useState(false); 
-    const [delMsg, setDelMsg] = useState(false); 
-
     return(
         <div className={styles.container}>
             {/* Messages section */}
-            <MapAllMsg sentMsg={sentMsg} delMsg={delMsg} setDelMsg={setDelMsg} />
+            <MapAllMsg />
 
             {/* Writing section */}
-            <PostNewMsg setSentMsg={setSentMsg} delMsg={delMsg} />
+            <PostNewMsg />
             
         </div>
     )

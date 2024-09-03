@@ -1,48 +1,34 @@
-import DOMPurify from "dompurify";
-import { useRef } from 'react';
+import { useContext } from 'react';
+import { LogInContext } from "../../context/LogInContextProvider";
+import { UsersContext } from "../../context/UsersContextProvider";
+import { ConversationContext } from '../../context/ConversationContextProvider';
 
 const PostNewMsg = ({ setSentMsg }) => {
-    const inputValue = useRef()
+    const { decodedJwt } = useContext(LogInContext);
+    const { invitationDetailsHandler } = useContext(UsersContext);
+    const { inputValue, newMessageHandler } = useContext(ConversationContext)
+    
 
-    const newMessageHandler = () => {
-        if (inputValue && inputValue.current.value.length > 0){
-            const newMessage = DOMPurify.sanitize(inputValue.current.value);
-            console.log(newMessage)
-
-            fetch(import.meta.env.VITE_API_URL + '/messages', {
-                method: 'POST',
-                headers: {
-                    Authorization: `Bearer ${sessionStorage.getItem("token")}`, 
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                    text: newMessage,
-                    conversationId: null
-                })
-            })
-            .then(response => {
-                if (!response.ok) {
-                    console.error('Problem with posting new message');
-                }
-                return response.json();
-            })
-            .then(data => {
-                setSentMsg(prev => !prev);
-                inputValue.current.value = "";
-            })
-            .catch(error => {
-                console.error('There was a problem with your fetch operation:', error);
-            });
-        };
+    const handleKeyDown = (e) => {
+        if (e.key === 'Enter') {
+            newMessageHandler();
+            invitationDetailsHandler(decodedJwt.userId);
+        }
     };
+    
+    const handleBtn = () => {
+        newMessageHandler();
+        // invitationDetailsHandler(decodedJwt.userId);
+    }
 
     return(
         <div>
             <input 
                 type="text" 
                 ref={inputValue}
+                onKeyDown={handleKeyDown}
             />
-            <button onClick={newMessageHandler}>Send</button>
+            <button onClick={handleBtn}>Send</button>
         </div>
     )
 };
