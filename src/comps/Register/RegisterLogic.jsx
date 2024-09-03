@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import DisplayRegister from './DisplayRegister';
 
 const RegisterLogic = () => {
@@ -28,6 +29,8 @@ const RegisterLogic = () => {
     const [mail, setMail] = useState('')
     const [avatar, setAvatar] = useState('')
 
+    const navigate = useNavigate()
+
     const createAccBtn = async(e) => {
         try {
             const response = await fetch(`${import.meta.env.VITE_API_URL}/auth/register`, {
@@ -43,6 +46,11 @@ const RegisterLogic = () => {
             })
             if (response.ok) {
                 setSuccMsg(response.message ? response.message : 'Your account has been created')
+                // Reset all values
+                setUsername('')
+                setPass('')
+                setMail('')
+                navigate('/log-in')
             } else {
                 setErrMsg(response.error ? response.error : 'Something went wrong. Try again later');
             }

@@ -3,6 +3,12 @@ import { Link } from 'react-router-dom';
 const DisplayRegister = ({ 
     createAccBtn, succMsg, errMsg, username, setUsername, pass, setPass, mail, setMail, avatar, setAvatar, 
 }) => {
+
+    const handleKeyDown = (e) => {
+        if (e.key === 'Enter') {
+            createAccBtn();
+        }
+    };
     
     return(
         <>
@@ -31,6 +37,7 @@ const DisplayRegister = ({
                     id="password"
                     value={pass} 
                     onChange={(e) => { setPass(e.target.value) }} 
+                    onKeyDown={handleKeyDown}
                 />
 
                 <button onClick={createAccBtn}>
