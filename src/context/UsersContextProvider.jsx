@@ -10,7 +10,8 @@ const UsersContextProvider = (props) => {
 
     const [isInviteResponse, setIsInviteResponse] = useState(false);
 
-    const [conversationDetails, setConversationDetails] = useState(sessionStorage.getItem('conversationInfo') || '');
+    const [searchValue, setSearchValue] = useState('');
+    const [searchedUsers, setSearchedUsers] = useState([]);
 
     // Generate GUID
     useEffect(() => {
@@ -83,29 +84,31 @@ const UsersContextProvider = (props) => {
         .finally (() => {
             // Reset guid value and everything
             generateGuid();
+            setSearchValue('');
+            setSearchedUsers([]);
         })
     };
 
     // IS THIS NEEDED?
-    const invitationDetailsHandler = (convoDetails) => {
-        setConversationDetails(convoDetails)
+    // const invitationDetailsHandler = (convoDetails) => {
+    //     setConversationDetails(convoDetails)
 
-        // console log the values before sessisonStorage
-        console.log(conversationDetails)
+    //     // console log the values before sessisonStorage
+    //     console.log(conversationDetails)
 
-        // console log the values after sessisonStorage
-        // IS THIS NEEDED?
-        // sessionStorage.setItem('conversationDetails', JSON.stringify(convoDetails));
-        // console.log('Stored conversationDetails:', sessionStorage.getItem("conversationDetails"));
-    };
+    //     // console log the values after sessisonStorage
+    //     // IS THIS NEEDED?
+    //     // sessionStorage.setItem('conversationDetails', JSON.stringify(convoDetails));
+    //     // console.log('Stored conversationDetails:', sessionStorage.getItem("conversationDetails"));
+    // };
 
     return(
         <UsersContext.Provider value={{ 
             users, isInviteResponse,
-            // allConversations,
-            getAllUsers, inviteHandler, 
-            conversationDetails, setConversationDetails,
-            invitationDetailsHandler
+            getAllUsers, inviteHandler,
+            searchValue, setSearchValue,
+            searchedUsers, setSearchedUsers,
+
         }}>
             {props.children}
         </UsersContext.Provider>

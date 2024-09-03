@@ -4,7 +4,7 @@ import DOMPurify from "dompurify";
 export const ConversationContext = createContext();
 
 const ConversationContextProvider = (props) => {
-    const [allConversations, setAllConversations] = useState([])
+    const [allConversations, setAllConversations] = useState(JSON.parse(sessionStorage.getItem('allConversationIds')) || [])
     const [conversationId, setConversationId] = useState(null)
     const [showConversation, setShowConversation] = useState(false)
     
@@ -31,6 +31,7 @@ const ConversationContextProvider = (props) => {
         })
         .then(data => {
             setAllConversations(data);
+            sessionStorage.setItem('allConversationIds', JSON.stringify(data))
         })
         .catch(error => {
             console.error('There was a problem with your fetch operation:', error);

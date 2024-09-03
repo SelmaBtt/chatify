@@ -12,13 +12,11 @@ const PostNewMsg = ({ setSentMsg }) => {
     const handleKeyDown = (e) => {
         if (e.key === 'Enter') {
             newMessageHandler();
-            invitationDetailsHandler(decodedJwt.userId);
         }
     };
     
     const handleBtn = () => {
         newMessageHandler();
-        // invitationDetailsHandler(decodedJwt.userId);
     }
 
     return(

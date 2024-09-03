@@ -1,12 +1,14 @@
 import { useContext, useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { LogInContext } from '../../context/LogInContextProvider';
+import { ConversationContext } from '../../context/ConversationContextProvider';
 import { Link } from 'react-router-dom';
 import styles from '../../styles/chat/ChatsHeader.module.css'
 import placeholderAvatar from '../../assets/placeholderAvatar.jpg'
 
 const ChatsHeader = () => {
     const { decodedJwt, setIsAuth } = useContext(LogInContext)
+    const { setShowConversation } = useContext(ConversationContext)
 
     const navigate = useNavigate();
 
@@ -17,6 +19,7 @@ const ChatsHeader = () => {
     const logoutHandler = () => {
         sessionStorage.clear();
         setIsAuth(false)
+        setShowConversation(false)
         navigate('/log-in');
     }
 

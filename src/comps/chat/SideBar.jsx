@@ -7,11 +7,10 @@ import { ConversationContext } from '../../context/ConversationContextProvider';
 
 const SideBar = () => {
     const { decodedJwt } = useContext(LogInContext);
-    const { users, isInviteResponse, getAllUsers, inviteHandler, invitationDetailsHandler } = useContext(UsersContext)
+    const { users, isInviteResponse, getAllUsers, inviteHandler, 
+        searchValue, setSearchValue,
+        searchedUsers, setSearchedUsers } = useContext(UsersContext)
     const { setShowConversation, allConversations, selectConversation } = useContext(ConversationContext)
-    
-    const [searchValue, setSearchValue] = useState('');
-    const [searchedUsers, setSearchedUsers] = useState([]);
 
     // Button handler for fetching all users and toggle window
     const btnHandler = () => {
@@ -46,7 +45,7 @@ const SideBar = () => {
     const inviteArray = JSON.parse(decodedJwt.invite);
 
     const openConvoHanlder = (convo) => {
-        selectConversation(convo)
+        selectConversation(convo);
         setShowConversation(true);
     }
 
