@@ -2,6 +2,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useContext, useEffect } from 'react';
 import { LogInContext } from '../context/LogInContextProvider';
 import { ConversationContext } from '../context/ConversationContextProvider';
+import styles from '../styles/RegLogin.module.css'
 
 const LogIn = () => {
     const { loginHandler, errMsg,
@@ -26,26 +27,41 @@ const LogIn = () => {
     };
 
     return(
-        <>
-            <Link to={'/'}>Home</Link>  
-            <input 
-                type="text" 
-                value={username}
-                onChange={(e) => { setUsername(e.target.value) }} 
-            />
-            <input 
-                type="text" 
-                value={pass}
-                onChange={(e) => { setPass(e.target.value) }} 
-                onKeyDown={handleKeyDown}
-            />
-            <button onClick={loginHandler}>Log in</button>
+        <div className='containerBase'>
+            <div className={`${styles.contentWrapperLogin} contentWrapperBase`}>
+                <div className={styles.titleWrapper}>
+                    <Link to={'/'} className={styles.backLink}>Home</Link>  
+                    <h1>Log in</h1>
+                </div>
+                <label htmlFor="theUsername" className={styles.label}>
+                    Username
+                </label>
+                <input 
+                    className={styles.input}
+                    type="text" 
+                    id="theUsername" 
+                    value={username}
+                    onChange={(e) => { setUsername(e.target.value) }} 
+                />
+                <label htmlFor="password" className={styles.label}>
+                    Password
+                </label>
+                <input 
+                    className={styles.input}
+                    type="text" 
+                    value={pass}
+                    id="password"
+                    onChange={(e) => { setPass(e.target.value) }} 
+                    onKeyDown={handleKeyDown}
+                />
+                <button onClick={loginHandler}>Log in</button>
 
-            {/* Error message */}
-            {(errMsg && errMsg.length > 0) &&
-                <p>{errMsg}</p>
-            }
-        </>
+                {/* Error message */}
+                {(errMsg && errMsg.length > 0) &&
+                    <p>{errMsg}</p>
+                }
+            </div>
+        </div>
     )
 }
 

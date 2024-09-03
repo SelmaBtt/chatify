@@ -1,19 +1,17 @@
-.container{
-    height: 100vh;
-    display: flex;
-}
-
 .contentWrapper{
     width: 61.2vw;
     height: 75.9vh;
-    margin: auto auto;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
 }
 
-.contentWrapper h1{color: var(--font-color);}
+.welcomeText{
+    color: var(--font-color);
+    font-family: var(--main-font);
+    font-weight: 400;
+}
 
 .contentWrapper hr{
     width: 69.5%;

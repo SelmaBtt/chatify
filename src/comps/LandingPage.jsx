@@ -3,10 +3,10 @@ import styles from '../styles/LandingPage.module.css'
 
 const LandingPage = () => {
     return(
-        <div className={styles.container}>
+        <div className='containerBase'>
             <div className={`${styles.contentWrapper} contentWrapperBase`}>
                 <h1>
-                    Welcome to <span className='logo'>Chatify</span>
+                    <span className={styles.welcomeText}>Welcome to</span> Chatify
                 </h1>
                 <hr />
                 <div className={styles.btnWrapper}>

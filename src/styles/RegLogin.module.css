@@ -1,0 +1,41 @@
+.contentWrapperReg{
+    width: 37.5%;
+    height: 843px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+}
+.contentWrapperLogin{
+    width: 37.5%;
+    height: 540px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.titleWrapper{width: 80%;}
+
+.backLink{
+    text-align: left;
+    color: var(--secondary-accent);
+}
+
+.titleWrapper h1{text-align: center;}
+
+.label{
+    font-size: var(--big-text);
+    color: var(--font-color);
+    margin: 0 0 -4% 0;
+    text-align: left;
+    width: 75%;
+}
+
+.input{
+    border: none;
+    height: 59px;
+    width: 80%;
+    padding: 0 2%;
+    font-size: var(--big-text);
+}

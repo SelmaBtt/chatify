@@ -29,15 +29,25 @@ hr{
 
 h1{
     font-size: var(--h1-size);
-    font-weight: 400;
+    font-family: var(--title-font);
+    color: var(--main-accent);
+}
+
+input{border-radius: var(--border-radius);}
+
+input:focus{
+    border: 5px solid var(--secondary-accent);
+    outline: none;
+}
+
+.containerBase{
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .contentWrapperBase{
     border-radius: var(--border-radius);
     background-color: var(--main-black);
-}
-
-.logo{
-    font-family: var(--title-font);
-    color: var(--main-accent);
 }
