@@ -24,12 +24,7 @@ const SideBar = () => {
     //     getAllConversations(conv);
     // });
 
-    // Button handler for fetching all users and toggle window
-    const btnHandler = () => {
-        toggleSearch();
-        getAllUsers();
-    };
-
+    
     // Search window handling
     const [isOpen, setIsOpen] = useState(false);
     const toggleSearch = () => {
@@ -37,7 +32,13 @@ const SideBar = () => {
         setSearchValue('');
         setSearchedUsers([]);
     };
-
+    
+    // Button handler for fetching all users and toggle window
+    const btnHandler = () => {
+        toggleSearch();
+        getAllUsers();
+    };
+    
     // To be able to search for specific user
     const handleKeyDown = (e) => {
         if (e.key === 'Enter') {
@@ -126,26 +127,28 @@ const SideBar = () => {
                 </div>
 
             </div>
-
-            {Array.isArray(inviteArray) && inviteArray.length > 0 &&
+            
+            <div>
+                <div className={styles.titleDiv}>
+                    <h2>Your chats</h2> <hr />
+                </div>
                 <div>
-                    <h2>Invitations</h2>
-                    {inviteArray.map((invite, idx) => (
-                        <div key={idx} onClick={() => {openConvoHanlder(invite.conversationId)}}>
-                            <p>{invite.username}</p>
+                    {Array.isArray(inviteArray) && inviteArray.length > 0 &&
+                        inviteArray.map((invite, idx) => (
+                            <div className={styles.chatsList} key={idx} onClick={() => {openConvoHanlder(invite.conversationId)}}>
+                                <p>{invite.username}</p>
+                            </div>
+                        ))
+                    }
+                    
+                    {allConversations.map((conv, idx) => (
+                        <div className={styles.chatsList} key={idx} onClick={() => openConvoHanlder(conv)}>
+                            Conversation {idx + 1}
                         </div>
                     ))}
                 </div>
-            }
-            
-            <div>
-                <h2>Your chats</h2>
-                {allConversations.map((conv, idx) => (
-                    <div key={idx} onClick={() => openConvoHanlder(conv)}>
-                        Conversation {idx + 1}
-                    </div>
-                ))}
             </div>
+            
         </div>
     )
 };

@@ -3,20 +3,26 @@
         width: 0%;
     }
     100% {
-        width: 70%;
+        width: 76%;
     }
 }
 
 .container{
     color: var(--font-color);
+    padding: 20px 7%;
 }
+
+.container > div{
+    margin-top: 39px;
+}
+
+.container > h1{text-align: center;}
 
 .searchClosedContainer{
     margin: 0 auto;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    width: 90%;
     height: 36px;
 }
 
@@ -27,42 +33,46 @@
 
 .searchInput{
     height: 36px;
-    width: 70%;
-    animation: expandingInput 0.2s forwards;
+    width: 76%;
+    animation: expandingInput 0.5s forwards;
     border: none;
     padding: 0 5%;
 }
 
+
 .searchBtn{
     position: absolute; 
     top: 2px; 
-    right: 12%; 
+    right: 4%; 
     background-color: transparent; 
     cursor: pointer; 
     padding: 0;
 }
+
+
 .searchBtn:hover{outline: none;}
 .searchBtn:active{outline: none;}
 
 .openSearchWindow{
+    height: 36px;
     display: flex;
-    justify-content: space-evenly;
+    justify-content: space-between;
     align-items: center;
     flex-wrap: wrap;
+    gap: 10px 0;
 }
 .closedSearchWindow{
     display: none;
 }
 
 .displaySearchedWrapper{
-    margin-top: 10px;
-    width: 90%;
+    width: 100%;
     background-color: var(--main-black);
     border-radius: var(--border-radius);
 }
 
 .serachedListItem{
-    padding: 5px 0;
+    padding: 5px 3%;
     display: grid;
     grid-template-areas: 'users button';
     grid-template-columns: 40% 60%;
@@ -75,8 +85,43 @@
 }
 
 .serachedListItem button{
+    padding: 12px 0;
     font-size: var(--text);
     grid-area: button;
-    width: 90%;
+    width: 80%;
     justify-self: end;
+}
+
+.titleDiv{
+    display: grid;
+    grid-template-areas: 'title line';
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    justify-content: space-between;
+    gap: min(6%);
+}
+
+.titleDiv h2{
+    grid-area: title;
+    text-wrap: nowrap;
+}
+
+.titleDiv hr{
+    grid-area: line;
+    width: 100%;
+}
+
+.chatsList{
+    padding: 15px 6%;
+    margin: 2px 0;
+}
+
+.chatsList:hover{
+    border-radius: 18px;
+    background-color: rgba(var(--main-accent-rgb), 0.2);
+    cursor: pointer; 
+}
+
+.chatsList:active{
+    background-color: rgba(var(--main-accent-rgb), 0.3);
 }
