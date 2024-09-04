@@ -17,7 +17,7 @@ const ChatApp = () => {
                 <div className={styles.inviteModal}>
                     <h2>Invite sent!</h2>
                     <svg xmlns="http://www.w3.org/2000/svg" width="34" height="34" viewBox="0 0 34 34" fill="none">
-                        <mask id="mask0_83_57" style={{ maskType: 'alpha' }} maskUnits="userSpaceOnUse" x="0" y="0" width="34" height="34">
+                        <mask id="mask0_83_57" maskUnits="userSpaceOnUse" x="0" y="0" width="34" height="34">
                             <rect width="34" height="34" fill="#D9D9D9" />
                         </mask>
                         <g mask="url(#mask0_83_57)">

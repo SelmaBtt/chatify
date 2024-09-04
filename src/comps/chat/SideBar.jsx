@@ -75,7 +75,7 @@ const SideBar = () => {
                         <>
                             <h2>Add user</h2>
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                <mask id="mask0_104_3" style={{ maskType: 'alpha' }} maskUnits="userSpaceOnUse" x="0" y="0" width="24" height="24">
+                                <mask id="mask0_104_3" maskUnits="userSpaceOnUse" x="0" y="0" width="24" height="24">
                                     <rect width="24" height="24" fill="#D9D9D9"/>
                                 </mask>
                                 <g mask="url(#mask0_104_3)">
@@ -89,7 +89,7 @@ const SideBar = () => {
 
             <div className={isOpen ? `${styles.searchWindow} ${styles.openSearchWindow}` : `${styles.searchWindow} ${styles.closedSearchWindow}`}>
                 <svg onClick={btnHandler} xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                    <mask id="mask0_104_3" style={{ maskType: 'alpha' }} maskUnits="userSpaceOnUse" x="0" y="0" width="24" height="24">
+                    <mask id="mask0_104_3" maskUnits="userSpaceOnUse" x="0" y="0" width="24" height="24">
                         <rect width="24" height="24" fill="#D9D9D9"/>
                     </mask>
                     <g mask="url(#mask0_104_3)">
@@ -105,7 +105,7 @@ const SideBar = () => {
                 />
                 <button onClick={searchHandler} className={styles.searchBtn}>
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                        <mask id="mask0_77_83" style={{ maskType: 'alpha' }} maskUnits="userSpaceOnUse" x="0" y="0" width="24" height="24">
+                        <mask id="mask0_77_83" maskUnits="userSpaceOnUse" x="0" y="0" width="24" height="24">
                             <rect width="24" height="24" fill="#D9D9D9"/>
                         </mask>
                         <g mask="url(#mask0_77_83)">

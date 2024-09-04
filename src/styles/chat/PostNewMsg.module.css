@@ -1,0 +1,21 @@
+.contentWrapper{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.msgInput{
+    height: 59px;
+    width: 53%;
+    padding: 0 5% 0 2%;
+    text-wrap: wrap;
+    font-size: var(--big-text);
+}
+
+.sendIcon{
+    position: absolute;
+    right: 20%;
+}
+
+.sendIcon:hover{cursor: pointer;}

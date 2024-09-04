@@ -41,7 +41,7 @@ const ChatsHeader = () => {
                 <ul className={styles.ul}>
                     <li onClick={() => navigate('/profile')}>
                         <svg xmlns="http://www.w3.org/2000/svg" width="34" height="34" viewBox="0 0 34 34" fill="none">
-                            <mask id="mask0_2_49" style={{ maskType: 'alpha' }} maskUnits="userSpaceOnUse" x="0" y="0" width="34" height="34">
+                            <mask id="mask0_2_49" maskUnits="userSpaceOnUse" x="0" y="0" width="34" height="34">
                             <rect width="34" height="34" fill="#D9D9D9" />
                             </mask>
                             <g mask="url(#mask0_2_49)">
@@ -52,7 +52,7 @@ const ChatsHeader = () => {
                     </li>
                     <li onClick={logoutHandler}>
                         <svg xmlns="http://www.w3.org/2000/svg" width="34" height="34" viewBox="0 0 34 34" fill="none">
-                            <mask id="mask0_2_60" style={{ maskType: 'alpha' }} maskUnits="userSpaceOnUse" x="0" y="0" width="34" height="34">
+                            <mask id="mask0_2_60" maskUnits="userSpaceOnUse" x="0" y="0" width="34" height="34">
                             <rect width="34" height="34" fill="#D9D9D9" />
                             </mask>
                             <g mask="url(#mask0_2_60)">

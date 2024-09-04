@@ -1,3 +1,20 @@
 .container{
-    
+    display: grid;
+    grid-template-areas: 
+        "messages"
+        "input"
+    ;
+    grid-template-rows: 85% 15%;
+    max-height: calc(100vh - 130px);
+    /* overflow: hidden; */
+    padding: 63px 0;
+}
+.container > :first-child{
+    grid-area: messages;
+    overflow-y: auto;
+}
+
+.container > :last-child{
+    grid-area: input;
+    align-self: end;
 }
