@@ -1,5 +1,5 @@
 body {
-    background-color: var(--accent-black);
+    /* background-color: var(--accent-black); */
     font-family: var(--main-font);
 }
 
@@ -36,8 +36,7 @@ h1{
 input{border-radius: var(--border-radius);}
 
 input:focus{
-    border: 5px solid var(--secondary-accent);
-    outline: none;
+    outline: 5px solid var(--secondary-accent);
 }
 
 .containerBase{

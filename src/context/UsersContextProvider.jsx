@@ -7,6 +7,7 @@ const UsersContextProvider = (props) => {
     const [guid, setGuid] = useState('');
 
     const [users, setUsers] = useState([]);
+    const [user, setUser] = useState([]);
 
     const [isInviteResponse, setIsInviteResponse] = useState(false);
 
@@ -42,11 +43,39 @@ const UsersContextProvider = (props) => {
         })
         .then(data => {
             setUsers(data)
+            console.log(user)
         })
         .catch(error => {
             console.error('There was a problem with your fetch operation:', error);
         })
     }
+
+    // Get one user
+    // ATTEMPT to display username on sidebar
+    // const getOneUser = (userId) => {
+    //     if(userId > 0 && userId !== user?.id){
+    //         fetch(`${import.meta.env.VITE_API_URL}/users/${userId}`, {
+    //             method: 'GET',
+    //             headers: {
+    //                 Authorization: `Bearer ${sessionStorage.getItem("token")}`, 
+    //                 'Content-Type': 'application/json',
+    //             },
+    //         })
+    //         .then(response => {
+    //             if (!response.ok) {
+    //                 console.error('Network response was not ok');
+    //             }
+    //             return response.json();
+    //         })
+    //         .then(data => {
+    //             setUser(data)
+    //             console.log(data)
+    //         })
+    //         .catch(error => {
+    //             console.error('There was a problem with your fetch operation:', error);
+    //         })
+    //     }
+    // }
 
     // Invite users
     const inviteHandler = (userId) => {
@@ -104,7 +133,9 @@ const UsersContextProvider = (props) => {
 
     return(
         <UsersContext.Provider value={{ 
-            users, isInviteResponse,
+            users, 
+            // user, getOneUser,
+            isInviteResponse,
             getAllUsers, inviteHandler,
             searchValue, setSearchValue,
             searchedUsers, setSearchedUsers,

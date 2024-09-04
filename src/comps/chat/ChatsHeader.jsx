@@ -8,7 +8,7 @@ import placeholderAvatar from '../../assets/placeholderAvatar.jpg'
 
 const ChatsHeader = () => {
     const { decodedJwt, setIsAuth } = useContext(LogInContext)
-    const { setShowConversation } = useContext(ConversationContext)
+    const { setShowConversation, setMessengerId } = useContext(ConversationContext)
 
     const navigate = useNavigate();
 
@@ -20,6 +20,7 @@ const ChatsHeader = () => {
         sessionStorage.clear();
         setIsAuth(false)
         setShowConversation(false)
+        setMessengerId([])
         navigate('/log-in');
     }
 

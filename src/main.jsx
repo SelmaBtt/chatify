@@ -7,13 +7,13 @@ import UsersContextProvider from './context/UsersContextProvider.jsx';
 import ConversationContextProvider from './context/ConversationContextProvider.jsx';
 
 createRoot(document.getElementById('root')).render(
-  <ConversationContextProvider>
-    <UsersContextProvider>
-      <LogInContextProvider>
-        <BrowserRouter>
-          <App />
-        </BrowserRouter>
-      </LogInContextProvider>
-    </UsersContextProvider>
-  </ConversationContextProvider>
+  <LogInContextProvider>
+    <ConversationContextProvider>
+      <UsersContextProvider>
+          <BrowserRouter>
+            <App />
+          </BrowserRouter>
+      </UsersContextProvider>
+    </ConversationContextProvider>
+  </LogInContextProvider>
 )

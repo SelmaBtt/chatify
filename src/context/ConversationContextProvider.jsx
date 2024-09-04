@@ -12,10 +12,13 @@ const ConversationContextProvider = (props) => {
     const [delMsg, setDelMsg] = useState(false);
     
     const [messages, setMessages] = useState([]);
+    const [messengerId, setMessengerId] = useState([])
     const inputValue = useRef()
+    // To minimize api calls
+    const prevConvIdsRef = useRef(new Set());
 
-    // Get all conversations (conversationIds)
-    const getConversations = () => {
+    // Get all conversationsIds
+    const getConversationIds = () => {
         fetch(`${import.meta.env.VITE_API_URL}/conversations`, {
             method: 'GET',
             headers: {
@@ -37,6 +40,62 @@ const ConversationContextProvider = (props) => {
             console.error('There was a problem with your fetch operation:', error);
         })
     };
+
+    // Get all usernames for conversationIds
+    // ATTEMPT to display username on sidebar
+    // const getAllConversations = (convIds) => {
+    //     if (convIds && !prevConvIdsRef.current.has(convIds)) {
+    //         fetch(`${import.meta.env.VITE_API_URL}/messages?conversationId=${convIds}`, {
+    //             method: 'GET',
+    //             headers: {
+    //                 Authorization: `Bearer ${sessionStorage.getItem("token")}`, 
+    //                 'Content-Type': 'application/json',
+    //             },
+    //         })
+    //         .then(response => {
+    //             if (!response.ok) {
+    //                 console.error('Network response was not ok');
+    //             }
+    //             return response.json();
+    //         })
+    //         .then(data => {
+    //             const decodedWebToken = JSON.parse(sessionStorage.getItem('decodedToken'));
+    //             const otherUserId = data.find(user => user.userId !== decodedWebToken.id)?.userId;
+    //             if (otherUserId) {
+    //                 console.log(otherUserId);
+    //                 setMessengerId(otherUserId);
+    //             }
+    //             prevConvIdsRef.current.add(convIds);
+    //         })
+    //         .catch(error => {
+    //             console.error('There was a problem with your fetch operation:', error);
+    //         });
+    //     }
+    // }
+
+    const getSelectedConversation = () => {
+        if (conversationId) {
+            fetch(`${import.meta.env.VITE_API_URL}/messages?conversationId=${conversationId}`, {
+                method: 'GET',
+                headers: {
+                    Authorization: `Bearer ${sessionStorage.getItem("token")}`, 
+                    'Content-Type': 'application/json',
+                },
+            })
+            .then(response => {
+                if (!response.ok) {
+                    console.error('Network response was not ok');
+                }
+                return response.json();
+            })
+            .then(data => {
+                setMessages(data);
+            })
+            .catch(error => {
+                console.error('There was a problem with your fetch operation:', error);
+            });
+        }
+    }
 
     const selectConversation = (conversationId) => {
         // TODO: fetch mot GET /messages?conversationId=${conversationId}
@@ -103,12 +162,14 @@ const ConversationContextProvider = (props) => {
             });
         };
     };
-
+    
     return(
         <ConversationContext.Provider value={{ 
             allConversations,
             conversationId, setConversationId,
-            getConversations,
+            messengerId,
+            // getAllConversations,
+            getConversationIds, getSelectedConversation,
             selectConversation,
             showConversation, setShowConversation, 
             sentMsg, setSentMsg,
@@ -116,6 +177,7 @@ const ConversationContextProvider = (props) => {
             messages, setMessages,
             delMessagesHandler,
             inputValue, newMessageHandler,
+            setMessengerId,
         }}>
             {props.children}
         </ConversationContext.Provider>

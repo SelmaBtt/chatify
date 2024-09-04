@@ -5,31 +5,11 @@ import styles from '../../styles/chat/MapAllMsg.module.css';
 
 const MapAllMsg = () => {
     const { decodedJwt } = useContext(LogInContext);
-    const { conversationId, messages, setMessages, delMessagesHandler, sentMsg, delMsg } = useContext(ConversationContext);
+    const { getSelectedConversation, conversationId, messages, setMessages, delMessagesHandler, sentMsg, delMsg } = useContext(ConversationContext);
 
     // Get all messages logic
     useEffect(() => {
-        if (conversationId) {
-            fetch(`${import.meta.env.VITE_API_URL}/messages?conversationId=${conversationId}`, {
-                method: 'GET',
-                headers: {
-                    Authorization: `Bearer ${sessionStorage.getItem("token")}`, 
-                    'Content-Type': 'application/json',
-                },
-            })
-            .then(response => {
-                if (!response.ok) {
-                    console.error('Network response was not ok');
-                }
-                return response.json();
-            })
-            .then(data => {
-                setMessages(data);
-            })
-            .catch(error => {
-                console.error('There was a problem with your fetch operation:', error);
-            });
-        }
+        getSelectedConversation()
     }, [sentMsg, delMsg, conversationId, setMessages]);
 
     return (
@@ -40,9 +20,7 @@ const MapAllMsg = () => {
                         <div
                             key={idx}
                             className={
-                                message.userId === decodedJwt.id
-                                    ? styles.myMessages
-                                    : styles.yourMessages
+                                message.userId === decodedJwt.id ? styles.myMessages : styles.yourMessages
                             }
                         >
                             <p>{message.text}</p>

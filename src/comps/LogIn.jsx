@@ -8,14 +8,14 @@ const LogIn = () => {
     const { loginHandler, errMsg,
         username, setUsername,
         pass, setPass, isAuth } = useContext(LogInContext)
-    const { getConversations } = useContext(ConversationContext)
+    const { getConversationIds } = useContext(ConversationContext)
     
     // To redirect the user to the chat 
     const navigate = useNavigate();
 
     useEffect(() => {
         if (isAuth) {
-            getConversations();
+            getConversationIds();
             navigate('/chat');
         }
     }, [isAuth, navigate]);

@@ -1,5 +1,5 @@
 import styles from '../../styles/Chat/Sidebar.module.css'
-import { useState, useContext } from 'react';
+import { useState, useContext, useEffect } from 'react';
 import { LogInContext } from '../../context/LogInContextProvider';
 import { UsersContext } from '../../context/UsersContextProvider';
 import { ConversationContext } from '../../context/ConversationContextProvider';
@@ -7,10 +7,22 @@ import { ConversationContext } from '../../context/ConversationContextProvider';
 
 const SideBar = () => {
     const { decodedJwt } = useContext(LogInContext);
-    const { users, isInviteResponse, getAllUsers, inviteHandler, 
+    const { users, /* user, */ isInviteResponse, 
+        getAllUsers, inviteHandler, 
         searchValue, setSearchValue,
-        searchedUsers, setSearchedUsers } = useContext(UsersContext)
-    const { setShowConversation, allConversations, selectConversation } = useContext(ConversationContext)
+        searchedUsers, setSearchedUsers,
+        // getOneUser,
+    } = useContext(UsersContext)
+    const { /* messengerId, */ setShowConversation, allConversations, /* getAllConversations, */ selectConversation } = useContext(ConversationContext)
+
+    // useEffect(() => {
+    //     console.log("messengerId updated:", messengerId);
+    //     getOneUser(messengerId)
+    // }, [messengerId])
+
+    // allConversations.map(conv => {
+    //     getAllConversations(conv);
+    // });
 
     // Button handler for fetching all users and toggle window
     const btnHandler = () => {
@@ -45,6 +57,7 @@ const SideBar = () => {
     const inviteArray = JSON.parse(decodedJwt.invite);
 
     const openConvoHanlder = (convo) => {
+        console.log(convo)
         selectConversation(convo);
         setShowConversation(true);
     }
@@ -98,7 +111,9 @@ const SideBar = () => {
             <div>
                 <h2>Your chats</h2>
                 {allConversations.map((conv, idx) => (
-                    <div key={idx} onClick={() => openConvoHanlder(conv)}>Konversation {idx + 1}</div>
+                    <div key={idx} onClick={() => openConvoHanlder(conv)}>
+                        Conversation {idx + 1}
+                    </div>
                 ))}
             </div>
         </div>
