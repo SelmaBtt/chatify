@@ -1,5 +1,5 @@
 body {
-    /* background-color: var(--accent-black); */
+    background-color: var(--accent-black);
     font-family: var(--main-font);
 }
 
@@ -13,7 +13,7 @@ button{
 }
 
 button:hover{
-    background-color: rgba(0, 0, 0, .0);;
+    background-color: transparent;
     outline: 3px solid var(--font-color);
     color: var(--font-color);
 }

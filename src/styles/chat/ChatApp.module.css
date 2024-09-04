@@ -5,6 +5,10 @@
     grid-template-columns: 19vw auto;
 }
 
+.contentContainer{
+    background-color: var(--main-black);
+}
+
 .mainContainer > :first-child {
     grid-area: side;
 }
