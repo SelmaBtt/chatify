@@ -105,7 +105,7 @@ const UsersContextProvider = (props) => {
             setIsInviteResponse(true);
             setTimeout(() => {
                 setIsInviteResponse(false);
-            }, 3000);
+            }, 2000);
         })
         .catch(error => {
             console.error('There was a problem with your fetch operation:', error);

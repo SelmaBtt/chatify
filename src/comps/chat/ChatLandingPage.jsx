@@ -1,9 +1,14 @@
+import styles from '../../styles/chat/ChatLandingPage.module.css'
+
 const ChatLandingPage = () => {
     return(
-        <div>
+        <div className={styles.contentWrapper}>
             <h1>
-                This is the home page for Chatify
+                Chatify
             </h1>
+            <h2>
+                Start chatting!
+            </h2>
         </div>
     )
 }

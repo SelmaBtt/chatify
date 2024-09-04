@@ -1,3 +1,18 @@
+@keyframes popup {
+    0%{
+        top: -100px;
+        transform: scale(1, 1);
+    }
+    60%{
+        top: 8px;
+        transform: scale(1.1, 1.1);
+    }
+    100%{
+        top: 8px;
+        transform: scale(1, 1);
+    }
+}
+
 .mainContainer{
     display: grid;
     height: 100vh;
@@ -5,8 +20,27 @@
     grid-template-columns: 19vw auto;
 }
 
+.inviteModal{
+    position: absolute;
+    top: 8px;
+    left: 50%;
+    color: var(--font-color);
+    font-family: var(--title-font);
+    display: flex;
+    gap: 27px;
+    padding: 26px 23px;
+    border-radius: var(--border-radius);
+    background-color: var(--accent-black);
+    animation: popup 0.9s ease-in-out;
+}
+
 .contentContainer{
     background-color: var(--main-black);
+}
+
+.contentContainer hr{
+    width: 93%;
+    margin: 0 auto;
 }
 
 .mainContainer > :first-child {
