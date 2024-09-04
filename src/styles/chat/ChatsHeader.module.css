@@ -1,17 +1,58 @@
+@keyframes slideAnimation{
+    0%{
+        width: 0;
+    }
+    100%{
+        width: 25%;
+    }
+}
+
+.userWrapper{
+    color: var(--font-color);
+    display: flex;
+    justify-content: flex-end;
+    padding: 39px 3.5%;
+}
+
+.userContainer{
+    display: flex;
+    align-items: center;
+    z-index: 2;
+    position: relative;
+}
+
+.userWrapper > * {cursor: pointer;}
+
+.avatarIcon{
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+    margin-left: 23px;
+}
+
 .overlay{
     background-color: black;
     top: 0;
     left: 0;
     right: 0;
     bottom: 0;
-    opacity: 10%;
+    opacity: 30%;
     position: fixed;
+    cursor: pointer;
 }
 
 .modal{
+    right: 0;
+    top: 0;
+    padding: 113px 3.8%;
+    width: 25%;
+    height: 100vh;
     background-color: whitesmoke;
-    position: relative;
+    position: absolute;
     z-index: 1;
+    background-color: var(--accent-black);
+    animation: slideAnimation 0.6s forwards;
+    border-radius: var(--border-radius);
 }
 
 .openModal{
@@ -19,4 +60,20 @@
 }
 .closedModal{
     display: none;
+}
+
+.ul{list-style: none;}
+
+.ul *{
+    color: var(--font-color);
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.ul li{
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    margin: 50px 0;
+    font-size: var(--big-text);
 }

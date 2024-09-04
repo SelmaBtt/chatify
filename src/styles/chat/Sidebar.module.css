@@ -24,12 +24,15 @@
     justify-content: space-between;
     align-items: center;
     height: 36px;
+    cursor: pointer;
 }
 
 .searchWindow{
     position: relative;
     z-index: 1;
 }
+
+.searchWindow > svg{cursor: pointer;}
 
 .searchInput{
     height: 36px;
