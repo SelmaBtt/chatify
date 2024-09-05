@@ -5,15 +5,18 @@ import './styles/root.css'
 import LogInContextProvider from './context/LogInContextProvider.jsx';
 import UsersContextProvider from './context/UsersContextProvider.jsx';
 import ConversationContextProvider from './context/ConversationContextProvider.jsx';
+import AvatarContextProvider from './context/AvatarContextProvider.jsx';
 
 createRoot(document.getElementById('root')).render(
-  <LogInContextProvider>
-    <ConversationContextProvider>
-      <UsersContextProvider>
-          <BrowserRouter>
-            <App />
-          </BrowserRouter>
-      </UsersContextProvider>
-    </ConversationContextProvider>
-  </LogInContextProvider>
+  <AvatarContextProvider>
+    <LogInContextProvider>
+      <ConversationContextProvider>
+        <UsersContextProvider>
+            <BrowserRouter>
+              <App />
+            </BrowserRouter>
+        </UsersContextProvider>
+      </ConversationContextProvider>
+    </LogInContextProvider>
+  </AvatarContextProvider>
 )

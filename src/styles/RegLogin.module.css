@@ -1,6 +1,6 @@
 .contentWrapperReg{
-    width: 37.5%;
-    height: 843px;
+    width: 40%;
+    height: 95%;
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
@@ -38,4 +38,44 @@
     width: 80%;
     padding: 0 2%;
     font-size: var(--big-text);
+}
+
+.uploadWrapper{
+    width: 80%;
+    height: 100px;
+    display: grid;
+    grid-template-areas: "input file";
+    grid-template-columns: 60% 40%;
+    align-items: center;
+    border-radius: var(--border-radius);
+    padding: 0 2%;
+}
+
+.imgWrapper{
+    grid-area: file;
+    justify-self: center;
+    background-color: var(--font-color);
+    height: 100%;
+    width: 100%;
+    border-radius: var(--border-radius);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.imgInput{
+    grid-area: input;
+    border-radius: 0;
+    cursor: pointer;
+}
+
+.imgInput:focus{
+    outline: none;
+}
+
+
+
+.imgUploaded{
+    max-width: 100px;
+    max-height: 100px;
 }

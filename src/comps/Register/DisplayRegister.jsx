@@ -1,10 +1,13 @@
 import { Link } from 'react-router-dom';
+import { useContext } from 'react';
 import styles from '../../styles/RegLogin.module.css'
+import { AvatarContext } from '../../context/AvatarContextProvider';
 
 
 const DisplayRegister = ({ 
     createAccBtn, succMsg, errMsg, username, setUsername, pass, setPass, mail, setMail, avatar, setAvatar, 
 }) => {
+    const { imageUrl, setImageUrl, handleFileChange } = useContext(AvatarContext)
 
     const handleKeyDown = (e) => {
         if (e.key === 'Enter') {
@@ -53,6 +56,17 @@ const DisplayRegister = ({
                     onChange={(e) => { setPass(e.target.value) }} 
                     onKeyDown={handleKeyDown}
                 />
+
+                <label className={styles.label}>Upload an avatar</label>
+                <div className={styles.uploadWrapper}>
+                    <input type="file" onChange={handleFileChange} className={styles.imgInput} />
+                        {imageUrl && (
+                            <div className={styles.imgWrapper}>
+                                <p>Your image</p>
+                                <img src={imageUrl} alt="Uploaded" className={styles.imgUploaded} />
+                            </div>
+                        )}
+                </div>
 
                 <button onClick={createAccBtn}>
                     Create account
