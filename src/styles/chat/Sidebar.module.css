@@ -10,8 +10,10 @@
 .container{
     color: var(--font-color);
     padding: 20px 7%;
+    overflow-y: auto;
 }
 
+.container::-webkit-scrollbar {width: 0;}
 .container > div{
     margin-top: 39px;
 }

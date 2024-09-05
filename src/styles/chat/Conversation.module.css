@@ -6,12 +6,21 @@
     ;
     grid-template-rows: 85% 15%;
     max-height: calc(100vh - 130px);
-    /* overflow: hidden; */
-    padding: 63px 0;
+    overflow: hidden;
+    padding: 30px 0 63px 0;
 }
 .container > :first-child{
     grid-area: messages;
     overflow-y: auto;
+}
+
+.container > :first-child::-webkit-scrollbar{
+    background-color: transparent;
+    width: 12px;
+}
+.container > :first-child::-webkit-scrollbar-thumb{
+    background-color: var(--button-color);
+    border-radius: var(--border-radius);
 }
 
 .container > :last-child{
