@@ -78,7 +78,7 @@ const UsersContextProvider = (props) => {
 
     // Invite users
     const inviteHandler = (userId) => {
-        console.log(`Got user id for user id: ${userId}`)
+        // console.log(`Got user id for user id: ${userId}`)
         if (!guid) {
             console.error('GUID is not generated or is empty');
             return;

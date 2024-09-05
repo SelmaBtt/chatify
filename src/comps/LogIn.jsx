@@ -48,7 +48,7 @@ const LogIn = () => {
                 </label>
                 <input 
                     className={styles.input}
-                    type="text" 
+                    type="password" 
                     value={pass}
                     id="password"
                     onChange={(e) => { setPass(e.target.value) }} 

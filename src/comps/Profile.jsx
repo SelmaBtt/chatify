@@ -51,7 +51,7 @@ const Profile = () => {
             return response.json();
         })
         .then(data => {
-            console.log("Successfully updated your profile" + JSON.stringify(data));
+            // console.log("Successfully updated your profile" + JSON.stringify(data));
             setDecodedJwt(prev => ({
                 ...prev,
                 user: username,

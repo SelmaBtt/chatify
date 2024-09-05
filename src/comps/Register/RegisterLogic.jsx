@@ -55,7 +55,7 @@ const RegisterLogic = () => {
                 setErrMsg(response.error ? response.error : 'Something went wrong. Try again later');
             }
         } catch (error) {
-            console.error('An error has occured', error);
+            console.error('There was a problem with your fetch operation', error);
         }
     };
 

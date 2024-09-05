@@ -56,7 +56,7 @@ const LogInContextProvider = (props) => {
             const decodedJwt = JSON.parse(atob(data.token.split('.')[1]));
             setDecodedJwt(decodedJwt)
             sessionStorage.setItem('decodedToken', JSON.stringify(decodedJwt));
-            console.log(decodedJwt) 
+            // console.log(decodedJwt) 
             // Save authentication values
             setIsAuth(true);
             sessionStorage.setItem('isAuth', true);

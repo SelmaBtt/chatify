@@ -98,12 +98,9 @@ const ConversationContextProvider = (props) => {
     }
 
     const selectConversation = (conversationId) => {
-        // TODO: fetch mot GET /messages?conversationId=${conversationId}
-        // TODO: ersätt/uppdatera messages med resultatet av ovanstående fetch
-
         setConversationId(conversationId);
         setShowConversation(true);
-        console.log(conversationId)
+        // console.log(conversationId)
     };
 
     // Del messages function
@@ -133,9 +130,7 @@ const ConversationContextProvider = (props) => {
     const newMessageHandler = () => {
         if (inputValue && inputValue.current.value.length > 0){
             const newMessage = DOMPurify.sanitize(inputValue.current.value);
-            console.log(newMessage)
-
-            // TODO: gör om nedanstående för query param finns bara för GET /messages
+            // console.log(newMessage)
             fetch(`${import.meta.env.VITE_API_URL}/messages?conversationId=${conversationId}`, {
                 method: 'POST',
                 headers: {

@@ -59,7 +59,7 @@ const SideBar = () => {
 
     // To make the decodedJwt, which is a string, to a array 
     const inviteArr = JSON.parse(decodedJwt.invite);
-    const inviteArray = []
+    let inviteArray = []
 
     if(inviteArr){
         inviteArray = inviteArr.reduce((inv, current) => {
@@ -71,7 +71,7 @@ const SideBar = () => {
     }
 
     const openConvoHanlder = (convo) => {
-        console.log(convo)
+        // console.log(convo)
         selectConversation(convo);
         setShowConversation(true);
     }

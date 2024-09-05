@@ -56,7 +56,7 @@ const DisplayRegister = ({
                 </label>
                 <input 
                     className={styles.input}
-                    type="text" 
+                    type="password" 
                     id="password"
                     value={pass} 
                     onChange={(e) => { setPass(e.target.value) }} 
@@ -68,8 +68,9 @@ const DisplayRegister = ({
                     <input type="file" onChange={handleFileChange} className={styles.imgInput} />
                         {imageUrl && (
                             <div className={styles.imgWrapper}>
-                                <p>Your image</p>
+                                <p>Uploaded image:</p>
                                 <img src={imageUrl} alt="Uploaded" className={styles.imgUploaded} />
+                                <p>URL: <a href={imageUrl} target="_blank">{imageUrl}</a></p>
                             </div>
                         )}
                 </div>
