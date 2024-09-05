@@ -41,3 +41,10 @@
 }
 .deleteIcon:hover{opacity: 100%;}
 .deleteIcon:active{opacity: 60%;}
+
+.noMsgWrapper{
+    color: var(--secondary-accent);
+    display: flex;
+    justify-content: center;
+    opacity: 30%;
+}

@@ -5,7 +5,7 @@
         "input"
     ;
     grid-template-rows: 85% 15%;
-    max-height: calc(100vh - 130px);
+    height: calc(100vh - 130px);
     overflow: hidden;
     padding: 30px 0 63px 0;
 }

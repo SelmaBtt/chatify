@@ -14,12 +14,18 @@ const DisplayRegister = ({
             createAccBtn(imageUrl);
         }
     };
+
+    const returnHandler = () => {
+        setUsername("")
+        setMail("")
+        setPass("")
+    };
     
     return(
         <div className='containerBase'>
             <div className={`${styles.contentWrapperReg} contentWrapperBase`}>
                 <div className={styles.titleWrapper}>
-                    <Link to={'/'} className={styles.backLink}>Back</Link>  
+                    <Link onClick={() => returnHandler()} to={'/'} className={styles.backLink}>Back</Link>  
                     <h1>Register account</h1>
                 </div>
         
@@ -74,10 +80,14 @@ const DisplayRegister = ({
             </div>
 
             {(succMsg && succMsg.length > 0) &&
-                <p>{succMsg}</p>
+                <div className={`${styles.succContainer} popupContainer`}>
+                    <p>{succMsg}</p>
+                </div>
             }
             {(errMsg && errMsg.length > 0) &&
-                <p>{errMsg}</p>
+                <div className={`${styles.errContainer} popupContainer`}>
+                    <p>{errMsg}</p>
+                </div>
             }
         </div>
     )

@@ -43,7 +43,9 @@ const MapAllMsg = () => {
                     ))}
                 </div>
             ) : (
-                <p>No messages found.</p>
+                <div className={styles.noMsgWrapper}>
+                    <h2>No messages found</h2>
+                </div>
             )}
         </div>
     );

@@ -58,7 +58,9 @@ const LogIn = () => {
 
                 {/* Error message */}
                 {(errMsg && errMsg.length > 0) &&
-                    <p>{errMsg}</p>
+                    <div className={`${styles.errContainer} popupContainer`}>
+                        <p>{errMsg}</p>
+                    </div>
                 }
             </div>
         </div>

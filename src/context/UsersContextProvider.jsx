@@ -7,7 +7,7 @@ const UsersContextProvider = (props) => {
     const [guid, setGuid] = useState('');
 
     const [users, setUsers] = useState([]);
-    const [user, setUser] = useState([]);
+    // const [user, setUser] = useState([]);
 
     const [isInviteResponse, setIsInviteResponse] = useState(false);
 

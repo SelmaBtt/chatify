@@ -10,6 +10,8 @@
     --secondary-accent: #B19CE8;
     --button-color: #98A886;
     --font-color: #FFFFFF;
+    --err-color: #A92D2D;
+    --succ-color: #578136;
 
     /* Fonts */
     --main-font: "Inter", sans-serif;

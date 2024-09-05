@@ -14,7 +14,7 @@ const ChatApp = () => {
     return(
         <div className={styles.mainContainer}>
             {isInviteResponse && 
-                <div className={styles.inviteModal}>
+                <div className={`${styles.inviteModal} popupContainer`}>
                     <h2>Invite sent!</h2>
                     <svg xmlns="http://www.w3.org/2000/svg" width="34" height="34" viewBox="0 0 34 34" fill="none">
                         <mask id="mask0_83_57" maskUnits="userSpaceOnUse" x="0" y="0" width="34" height="34">
