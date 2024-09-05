@@ -32,7 +32,6 @@ const AvatarContextProvider = (props) => {
             toast.success('Image uploaded successfully!');
         } catch (error) {
             console.error('Upload failed:', error);
-            toast.error('Upload failed: ' + error.toString());
         }
     };    
 

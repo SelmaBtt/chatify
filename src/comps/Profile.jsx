@@ -2,6 +2,7 @@ import { useContext, useState } from "react";
 import { LogInContext } from "../context/LogInContextProvider";
 import { Link, useNavigate } from "react-router-dom";
 import styles from '../styles/Profile.module.css'
+import { AvatarContext } from "../context/AvatarContextProvider";
 import placeholderAvatar from '../assets/placeholderAvatar.jpg'
 
 const Profile = () => {
@@ -11,6 +12,9 @@ const Profile = () => {
         pass, setPass,
         avatar, setAvatar,
         setIsAuth, setShowConversation } = useContext(LogInContext);
+    
+    const { imageUrl, setImageUrl, handleFileChange } = useContext(AvatarContext)
+
 
     const [errMsg, setErrMsg] = useState('')
 
@@ -40,7 +44,7 @@ const Profile = () => {
                 "updatedData": {
                     "username": username,
                     "email": email,
-                    "avatar": avatar,
+                    "avatar": imageUrl || avatar,
                 }
             })
         })
@@ -56,13 +60,13 @@ const Profile = () => {
                 ...prev,
                 user: username,
                 email: email,
-                avatar: avatar,
+                avatar: imageUrl || avatar,
             }));
             sessionStorage.setItem('decodedToken', JSON.stringify({
                 ...decodedJwt,
                 user: username,
                 email: email,
-                avatar: avatar,
+                avatar: imageUrl || avatar,
             }));
             navigate('/chat')
         })
@@ -100,6 +104,8 @@ const Profile = () => {
         });
     };
 
+
+
     return(
         <>
             <div>
@@ -128,10 +134,27 @@ const Profile = () => {
                     />
                     <p>Profile picture</p>
                     <input 
-                        type="url" 
-                        value={avatar}
-                        onChange={(e) => setAvatar(e.target.value)}
+                        type="file"
+                        value={avatar} 
+                        onChange={handleFileChange} 
                     />
+                    {imageUrl ? (
+                        <div>
+                            <h3>Uploaded Image:</h3>
+                            <img src={imageUrl} alt="Uploaded" style={{ maxWidth: '100%' }} />
+                            <p>URL: <a href={imageUrl} target="_blank">{imageUrl}</a></p>
+                        </div>
+                    ) : avatar ? (
+                        <div>
+                            <h3>Your avatar</h3>
+                            <img src={avatar} alt="Current image" />
+                        </div>
+                    ) : (
+                        <div>
+                            <h3>Your avatar</h3>
+                            <img src={placeholderAvatar} alt="Current image" />
+                        </div>
+                    )}
                     <button onClick={updateUserHandler}>Submit changes</button>
                 </div>
 

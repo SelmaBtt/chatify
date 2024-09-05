@@ -7,7 +7,7 @@ import { AvatarContext } from '../../context/AvatarContextProvider';
 const DisplayRegister = ({ 
     createAccBtn, succMsg, errMsg, username, setUsername, pass, setPass, mail, setMail, avatar, setAvatar, 
 }) => {
-    const { imageUrl, setImageUrl, handleFileChange } = useContext(AvatarContext)
+    const { imageUrl, handleFileChange } = useContext(AvatarContext)
 
     const handleKeyDown = (e) => {
         if (e.key === 'Enter') {
