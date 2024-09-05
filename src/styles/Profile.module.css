@@ -1,15 +1,106 @@
-/* Update window */
-.updateWindow{
-    background-color: whitesmoke;
-    position: relative;
-    z-index: 1;
-}
-
-.openUpdateWindow{
+.backLink{
+    margin: 5% 20%;
+    color: var(--secondary-accent);
     display: block;
 }
-.closedUpdateWindow{
-    display: none;
+
+.container *::-webkit-scrollbar{
+    background-color: transparent;
+    width: 5px;
+}
+
+.container *::-webkit-scrollbar-thumb{
+    background-color: var(--button-color);
+    border-radius: var(--border-radius);
+}
+
+.container{
+    display: flex;
+    gap: 43px;
+    justify-content: center;
+    align-items: center; 
+}
+
+.displayCurrentInfo{
+    height: 564px;
+    width: 29.5%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+.displayCurrentInfo > img{
+    border-radius: 50%;
+    height: 255px;
+    width: 255px;
+}
+
+.displayCurrentInfo > hr{
+    width: 80%;
+}
+
+.userDetails{
+    padding: 0 10%;
+    align-self: flex-start;
+    color: var(--font-color);
+    overflow-x: auto;
+}
+
+.userDetails p{font-size: var(--big-text)}
+
+.userDetails > p:first-of-type{margin-bottom: 30px}
+
+/* Update section */
+.accountChangeWrapper{
+    height: 564px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.accountChangeWrapper button{
+    padding: 11px 15px;
+    font-size: var(--big-text);
+}
+
+.updateContainer{
+    color: var(--font-color);
+    display: flex;
+    flex-direction: column;
+    padding: 32px 8%;
+    gap: 36px;
+}
+
+.updateContainer > input{
+    height: 36px;
+    padding: 3%;
+}
+
+.updImgContainer{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    height: 153px;
+    gap: 5%;
+}
+
+.updImgContainer > input{width: 50%;}
+
+.uploadImgContainer{
+    height: 100%;
+    align-self: flex-start;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
+.uploadImgContainer img{max-height: 100%;}
+
+.uploadImgContainer a{color: var(--secondary-accent);}
+
+.changeBtn{
+    display: flex;
+    justify-content: center;
 }
 
 /* Delete window */
@@ -46,9 +137,7 @@
 
 .openDelWindow > h2{font-family: var(--title-font);}
 
-.closedDelWindow{
-    display: none;
-}
+.closedDelWindow{display: none;}
 
 .delBtnWrapper{
     width: 100%;
@@ -59,12 +148,11 @@
 .delBtnWrapper button:first-child{
     background-color: transparent;
     color: var(--font-color);
-    outline: 3px solid var(--font-color);
 }
 .delBtnWrapper button:first-child:hover{
     background-color: transparent;
     color: var(--font-color);
-    outline: 5px solid var(--font-color);
+    outline: 3px solid var(--font-color);
 }
 .delBtnWrapper button:first-child:active{
     background-color: var(--err-color);
@@ -81,3 +169,5 @@
     opacity: 30%;
     position: fixed;
 }
+
+.errMsgPopup{background-color: var(--err-color);}

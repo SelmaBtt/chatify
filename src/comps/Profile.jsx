@@ -16,14 +16,11 @@ const Profile = () => {
 
 
     const [errMsg, setErrMsg] = useState('')
+    const [isErrMsg, setIsErrMsg] = useState(false)
 
-    const [isOpenUpdate, setIsOpenUpdate] = useState(false);
     const [isOpenDel, setIsOpenDel] = useState(false);
 
     const [confirmDel, setConfirmDel] = useState('')
-
-    // Handle update ui
-    const toggleModal = () => setIsOpenUpdate(!isOpenUpdate); 
 
     // Handle delete ui
     const toggleDeleteMessage = () => setIsOpenDel(!isOpenDel); 
@@ -72,6 +69,10 @@ const Profile = () => {
         .catch(error => {
             console.error('There was a problem with your fetch operation:', error);
             setErrMsg(error.message ? error.message : 'Something went wrong while trying to update your profile. Try again later')
+            setIsErrMsg(true)
+            setTimeout(() => {
+                setIsErrMsg(false)
+            }, 2000)
         })
     };
 
@@ -105,56 +106,63 @@ const Profile = () => {
 
     return(
         <>
-            <div>
-                <Link to={'/chat'}>Back</Link>
-                <h1>
-                    {decodedJwt.user}
-                </h1>
-                <img style={{height: "100px"}} src={decodedJwt.avatar || placeholderAvatar} alt="profile picture" />
-                <p>E-mail: {decodedJwt.email}</p>
-
-                <button onClick={toggleModal}>
-                    {isOpenUpdate ? "Close" : "Update your profile"}
-                </button>
-                <div className={isOpenUpdate ? `${styles.updateWindow} ${styles.openUpdateWindow}` : `${styles.updateWindow} ${styles.closedUpdateWindow}`}>
-                    <p>Username</p>
-                    <input 
-                        type="text"
-                        value={username}
-                        onChange={(e) => setUsername(e.target.value)}
-                    />
-                    <p>E-mail</p>
-                    <input 
-                        type="text" 
-                        value={email}
-                        onChange={(e) => setEmail(e.target.value)}
-                    />
-                    <p>Profile picture</p>
-                    <input 
-                        type="file"
-                        onChange={handleFileChange} 
-                    />
-                    {imageUrl ? (
-                        <div>
-                            <h3>Uploaded Image:</h3>
-                            <img src={imageUrl} alt="Uploaded" style={{ maxWidth: '100%' }} />
-                            <p>URL: <a href={imageUrl} target="_blank">{imageUrl}</a></p>
-                        </div>
-                    ) : avatar ? (
-                        <div>
-                            <h3>Your avatar</h3>
-                            <img src={avatar} alt="Current image" />
-                        </div>
-                    ) : (
-                        <div>
-                            <h3>Your avatar</h3>
-                            <img src={placeholderAvatar} alt="Current image" />
-                        </div>
-                    )}
-                    <button onClick={updateUserHandler}>Submit changes</button>
+            <Link className={styles.backLink} to={'/chat'}>Back</Link>
+            <div className={styles.container}>
+                <div className={`${styles.displayCurrentInfo} contentWrapperBase`}>
+                    <img src={decodedJwt.avatar || placeholderAvatar} alt="profile picture" />
+                    <hr />
+                    <div className={styles.userDetails}>
+                        <h2>E-mail:</h2>
+                        <p>{decodedJwt.email}</p>
+                        <h2>Username:</h2>
+                        <p>{decodedJwt.user}</p>
+                    </div>
                 </div>
 
-                <button onClick={toggleDeleteMessage}>Delete Account</button>
+                <div className={styles.accountChangeWrapper}>
+                    <h1>Update your profile</h1>
+                    <div className={`${styles.updateContainer} contentWrapperBase`}>
+                        <input 
+                            type="text"
+                            value={username}
+                            onChange={(e) => setUsername(e.target.value)}
+                        />
+                        <input 
+                            type="text" 
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
+                        />
+                        <div className={styles.updImgContainer}>
+                            <input 
+                                type="file"
+                                onChange={handleFileChange} 
+                            />
+                            {imageUrl ? (
+                                <div className={styles.uploadImgContainer}>
+                                    <p>Uploaded Image:</p>
+                                    <img src={imageUrl} alt="Uploaded" style={{ maxWidth: '100%' }} />
+                                    <p>URL: <a href={imageUrl} target="_blank">{imageUrl}</a></p>
+                                </div>
+                            ) : avatar ? (
+                                <div className={styles.uploadImgContainer}>
+                                    <p>Your avatar:</p>
+                                    <img src={avatar} alt="Current image" />
+                                </div>
+                            ) : (
+                                <div className={styles.uploadImgContainer}>
+                                    <p>Your avatar:</p>
+                                    <img src={placeholderAvatar} alt="Current image" />
+                                </div>
+                            )}
+                        </div>
+                        <div className={styles.changeBtn}>
+                            <button onClick={updateUserHandler}>Submit changes</button>
+                        </div>
+                    </div>
+                    <div>
+                        <button onClick={toggleDeleteMessage}>Delete Account</button>
+                    </div>
+                </div>
 
                 <div className={isOpenDel ? `${styles.delWindow} ${styles.openDelWindow}` : `${styles.delWindow} ${styles.closedDelWindow}`}>
                     <p onClick={toggleDeleteMessage}>
@@ -170,6 +178,8 @@ const Profile = () => {
                 </div>
 
                 {isOpenDel && <div className={styles.overlay} onClick={toggleDeleteMessage}></div>}
+
+                {isErrMsg && <div className={`${styles.errMsgPopup} popupContainer`}>{errMsg}</div>}
             </div>
         </>
     )
