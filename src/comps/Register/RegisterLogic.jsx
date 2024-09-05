@@ -31,7 +31,7 @@ const RegisterLogic = () => {
 
     const navigate = useNavigate()
 
-    const createAccBtn = async(e) => {
+    const createAccBtn = async(imgUrl) => {
         try {
             const response = await fetch(`${import.meta.env.VITE_API_URL}/auth/register`, {
                 method: 'POST',
@@ -40,7 +40,7 @@ const RegisterLogic = () => {
                     username: username,
                     password: pass,
                     email: mail,
-                    avatar: avatar,
+                    avatar: imgUrl,
                     csrfToken: csrf,
                 })
             })

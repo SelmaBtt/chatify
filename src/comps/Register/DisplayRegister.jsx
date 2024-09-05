@@ -5,13 +5,13 @@ import { AvatarContext } from '../../context/AvatarContextProvider';
 
 
 const DisplayRegister = ({ 
-    createAccBtn, succMsg, errMsg, username, setUsername, pass, setPass, mail, setMail, avatar, setAvatar, 
+    createAccBtn, succMsg, errMsg, username, setUsername, pass, setPass, mail, setMail,
 }) => {
     const { imageUrl, handleFileChange } = useContext(AvatarContext)
 
     const handleKeyDown = (e) => {
         if (e.key === 'Enter') {
-            createAccBtn();
+            createAccBtn(imageUrl);
         }
     };
     
@@ -68,7 +68,7 @@ const DisplayRegister = ({
                         )}
                 </div>
 
-                <button onClick={createAccBtn}>
+                <button onClick={() => createAccBtn(imageUrl)}>
                     Create account
                 </button>
             </div>
