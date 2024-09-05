@@ -13,18 +13,21 @@ const SideBar = () => {
         searchedUsers, setSearchedUsers,
         // getOneUser,
     } = useContext(UsersContext)
-    const { /* messengerId, */ setShowConversation, allConversations, /* getAllConversations, */ selectConversation } = useContext(ConversationContext)
-
-    // useEffect(() => {
-    //     console.log("messengerId updated:", messengerId);
-    //     getOneUser(messengerId)
-    // }, [messengerId])
-
-    // allConversations.map(conv => {
-    //     getAllConversations(conv);
-    // });
-
+    const { /* messengerId, */ setShowConversation, allConversations, /* getAllConversations, */ selectConversation, getConversationIds } = useContext(ConversationContext)
     
+    // useEffect(() => {
+        //     console.log("messengerId updated:", messengerId);
+        //     getOneUser(messengerId)
+        // }, [messengerId])
+        
+        // allConversations.map(conv => {
+        //     getAllConversations(conv);
+        // });
+                  
+    useEffect(() => {
+        getConversationIds()
+    }, [inviteHandler])
+
     // Search window handling
     const [isOpen, setIsOpen] = useState(false);
     const toggleSearch = () => {
@@ -55,13 +58,17 @@ const SideBar = () => {
     }
 
     // To make the decodedJwt, which is a string, to a array 
-    const invArr = JSON.parse(decodedJwt.invite);
-    const inviteArray = invArr.reduce((inv, current) => {
-        let exists = null;
-        if (current.username) exists = inv.find(item => item.username === current.username);
-        if (!exists) inv.push(current);
-        return inv;
-    }, [])
+    const inviteArr = JSON.parse(decodedJwt.invite);
+    const inviteArray = []
+
+    if(inviteArr){
+        inviteArray = inviteArr.reduce((inv, current) => {
+            let exists = null;
+            if (current.username) exists = inv.find(item => item.username === current.username);
+            if (!exists) inv.push(current);
+            return inv;
+        }, [])
+    }
 
     const openConvoHanlder = (convo) => {
         console.log(convo)
@@ -77,7 +84,7 @@ const SideBar = () => {
             <div onClick={btnHandler} className={!isOpen && `${styles.searchClosedContainer}`}>
                 {isOpen ? (
                     ""
-                ) : (
+                    ) : (
                         <>
                             <h2>Add user</h2>
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">

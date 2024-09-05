@@ -43,7 +43,6 @@ const UsersContextProvider = (props) => {
         })
         .then(data => {
             setUsers(data)
-            console.log(user)
         })
         .catch(error => {
             console.error('There was a problem with your fetch operation:', error);

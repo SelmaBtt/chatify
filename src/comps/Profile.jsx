@@ -104,8 +104,6 @@ const Profile = () => {
         });
     };
 
-
-
     return(
         <>
             <div>
