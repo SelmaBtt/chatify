@@ -14,9 +14,13 @@
 
 /* Delete window */
 .delWindow{
-    background-color: honeydew;
+    background-color: var(--accent-black);
     z-index: 1;
-    position: relative;
+    color: var(--font-color);
+    position: absolute;
+    top: 0;
+    
+    width: 513px;
 }
 
 .openDelWindow{
@@ -32,6 +36,6 @@
     left: 0;
     right: 0;
     bottom: 0;
-    opacity: 10%;
+    opacity: 30%;
     position: fixed;
 }

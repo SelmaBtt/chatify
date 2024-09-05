@@ -4,11 +4,11 @@ import react from '@vitejs/plugin-react'
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [react(), sentryVitePlugin({
+  plugins: [react()/* , sentryVitePlugin({
     org: "jensen-yh-hb",
     project: "chatify"
-  })],
-  build: {
-    sourcemap: true,
-  },
+  }) */],
+  // build: {
+  //   sourcemap: true,
+  // },
 })
