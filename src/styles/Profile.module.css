@@ -17,17 +17,59 @@
     background-color: var(--accent-black);
     z-index: 1;
     color: var(--font-color);
-    position: absolute;
-    top: 0;
-    
-    width: 513px;
+    position: fixed;
+    transform: translate(-50%, -50%);
+    top: 50%;
+    left: 50%;
+    border-radius: var(--border-radius);
 }
 
 .openDelWindow{
-    display: block;
+    text-align: center;
+    padding: 60px 52px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 23px;
 }
+
+.openDelWindow p:first-child{
+    justify-self: start;
+    align-self: flex-start;
+    text-decoration: underline;
+    cursor: pointer;
+    color: var(--secondary-accent);
+}
+
+.openDelWindow p:first-child:hover{color: var(--secondary-accent);}
+
+.openDelWindow > h2{font-family: var(--title-font);}
+
 .closedDelWindow{
     display: none;
+}
+
+.delBtnWrapper{
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.delBtnWrapper button:first-child{
+    background-color: transparent;
+    color: var(--font-color);
+    outline: 3px solid var(--font-color);
+}
+.delBtnWrapper button:first-child:hover{
+    background-color: transparent;
+    color: var(--font-color);
+    outline: 5px solid var(--font-color);
+}
+.delBtnWrapper button:first-child:active{
+    background-color: var(--err-color);
+    transform: scale(1.1);
+    outline: none;
 }
 
 .overlay{

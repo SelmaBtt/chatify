@@ -9,11 +9,10 @@ const Profile = () => {
     const { decodedJwt, setDecodedJwt, 
         username, setUsername,
         email, setEmail,
-        pass, setPass,
-        avatar, setAvatar,
+        avatar,
         setIsAuth, setShowConversation } = useContext(LogInContext);
     
-    const { imageUrl, setImageUrl, handleFileChange } = useContext(AvatarContext)
+    const { imageUrl, handleFileChange } = useContext(AvatarContext)
 
 
     const [errMsg, setErrMsg] = useState('')
@@ -158,13 +157,15 @@ const Profile = () => {
                 <button onClick={toggleDeleteMessage}>Delete Account</button>
 
                 <div className={isOpenDel ? `${styles.delWindow} ${styles.openDelWindow}` : `${styles.delWindow} ${styles.closedDelWindow}`}>
-                    <button onClick={toggleDeleteMessage}>
+                    <p onClick={toggleDeleteMessage}>
                         Close
-                    </button>
+                    </p>
                     <h2>You're about to delete your account!</h2>
                     <p>Are you sure you want to delete your account?</p>
-                    <button onClick={delAccountHandler}>Yes</button>
-                    <button onClick={toggleDeleteMessage}>No</button>
+                    <div className={styles.delBtnWrapper}>
+                        <button onClick={delAccountHandler}>Yes</button>
+                        <button onClick={toggleDeleteMessage}>No</button>
+                    </div>
                     <p>{confirmDel}</p>
                 </div>
 
