@@ -55,7 +55,13 @@ const SideBar = () => {
     }
 
     // To make the decodedJwt, which is a string, to a array 
-    const inviteArray = JSON.parse(decodedJwt.invite);
+    const invArr = JSON.parse(decodedJwt.invite);
+    const inviteArray = invArr.reduce((inv, current) => {
+        let exists = null;
+        if (current.username) exists = inv.find(item => item.username === current.username);
+        if (!exists) inv.push(current);
+        return inv;
+    }, [])
 
     const openConvoHanlder = (convo) => {
         console.log(convo)

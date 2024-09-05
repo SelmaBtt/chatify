@@ -133,9 +133,10 @@ const Profile = () => {
                         onChange={(e) => setEmail(e.target.value)}
                     />
                     <p>Profile picture</p>
+                    {/* TODO: Behövs value={avatar} ?? */}
                     <input 
                         type="file"
-                        value={avatar} 
+                        // value={decodedJwt.avatar} 
                         onChange={handleFileChange} 
                     />
                     {imageUrl ? (
