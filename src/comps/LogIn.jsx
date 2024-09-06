@@ -26,11 +26,16 @@ const LogIn = () => {
         }
     };
 
+    const homeHandler = () => {
+        setUsername('')
+        setPass('')
+    }
+
     return(
         <div className='containerBase'>
             <div className={`${styles.contentWrapperLogin} contentWrapperBase`}>
                 <div className={styles.titleWrapper}>
-                    <Link to={'/'} className={styles.backLink}>Home</Link>  
+                    <Link to={'/'} className={styles.backLink} onClick={homeHandler}>Home</Link>  
                     <h1>Log in</h1>
                 </div>
                 <label htmlFor="theUsername" className={styles.label}>

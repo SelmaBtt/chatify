@@ -6,10 +6,7 @@ import { LogInContext } from '../../context/LogInContextProvider'
 import { AvatarContext } from '../../context/AvatarContextProvider'
 
 const DisplayProfile = ({ errMsg, isErrMsg, confirmDel, updateUserHandler, delAccountHandler }) => {
-    const { decodedJwt, setDecodedJwt, 
-        username, setUsername,
-        email, setEmail, avatar,
-        setIsAuth, setShowConversation } = useContext(LogInContext);
+    const { decodedJwt, username, setUsername, email, setEmail } = useContext(LogInContext);
     
     const { imageUrl, handleFileChange } = useContext(AvatarContext)
     

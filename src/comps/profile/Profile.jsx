@@ -7,11 +7,9 @@ import DisplayProfile from "./DisplayProfile";
 
 const Profile = () => {
     const { decodedJwt, setDecodedJwt, 
-        username, setUsername,
-        email, setEmail, avatar,
-        setIsAuth, setShowConversation } = useContext(LogInContext);
+        username, email, avatar, setIsAuth, setShowConversation } = useContext(LogInContext);
     
-    const { imageUrl, handleFileChange } = useContext(AvatarContext)
+    const { imageUrl } = useContext(AvatarContext)
 
 
     const [errMsg, setErrMsg] = useState('')

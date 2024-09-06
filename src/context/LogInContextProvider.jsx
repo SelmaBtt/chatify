@@ -62,6 +62,9 @@ const LogInContextProvider = (props) => {
             sessionStorage.setItem('isAuth', true);
         } catch (error) {
             setErrMsg(error.message ? error.message : 'Something went wrong while trying to log in. Try again later');
+            setTimeout(() => {
+                setErrMsg('')
+            }, 3000)
             console.error(`Error: ${error}`)
         }
     };
