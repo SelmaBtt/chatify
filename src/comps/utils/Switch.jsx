@@ -4,7 +4,7 @@ import LogIn from '../LogIn';
 import RegisterLogic from '../register/RegisterLogic';
 import ProtectedRoute from './ProtectedRoutes';
 import ChatApp from '../chat/ChatApp';
-import Profile from '../Profile';
+import Profile from '../profile/Profile';
 
 const Switch = () => {
     return(

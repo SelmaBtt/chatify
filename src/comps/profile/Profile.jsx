@@ -1,15 +1,14 @@
 import { useContext, useState } from "react";
-import { LogInContext } from "../context/LogInContextProvider";
-import { Link, useNavigate } from "react-router-dom";
-import styles from '../styles/Profile.module.css'
-import { AvatarContext } from "../context/AvatarContextProvider";
-import placeholderAvatar from '../assets/placeholderAvatar.jpg'
+import { LogInContext } from "../../context/LogInContextProvider";
+import { AvatarContext } from "../../context/AvatarContextProvider";
+import { useNavigate } from "react-router-dom";
+import DisplayProfile from "./DisplayProfile";
+
 
 const Profile = () => {
     const { decodedJwt, setDecodedJwt, 
         username, setUsername,
-        email, setEmail,
-        avatar,
+        email, setEmail, avatar,
         setIsAuth, setShowConversation } = useContext(LogInContext);
     
     const { imageUrl, handleFileChange } = useContext(AvatarContext)
@@ -18,12 +17,7 @@ const Profile = () => {
     const [errMsg, setErrMsg] = useState('')
     const [isErrMsg, setIsErrMsg] = useState(false)
 
-    const [isOpenDel, setIsOpenDel] = useState(false);
-
     const [confirmDel, setConfirmDel] = useState('')
-
-    // Handle delete ui
-    const toggleDeleteMessage = () => setIsOpenDel(!isOpenDel); 
 
     // To redirect the user back to the chat component
     const navigate = useNavigate();
@@ -50,7 +44,7 @@ const Profile = () => {
             }
             return response.json();
         })
-        .then(data => {
+        .then(() => {
             // console.log("Successfully updated your profile" + JSON.stringify(data));
             setDecodedJwt(prev => ({
                 ...prev,
@@ -103,10 +97,15 @@ const Profile = () => {
             console.error('There was a problem with your fetch operation:', error);
         });
     };
-
+    
     return(
         <>
-            <Link className={styles.backLink} to={'/chat'}>Back</Link>
+            <DisplayProfile 
+                errMsg={errMsg} isErrMsg={isErrMsg} confirmDel={confirmDel} 
+                updateUserHandler={updateUserHandler} delAccountHandler={delAccountHandler} 
+            />
+
+            {/* <Link className={styles.backLink} to={'/chat'}>Back</Link>
             <div className={styles.container}>
                 <div className={`${styles.displayCurrentInfo} contentWrapperBase`}>
                     <img src={decodedJwt.avatar || placeholderAvatar} alt="profile picture" />
@@ -124,6 +123,7 @@ const Profile = () => {
                     <div className={`${styles.updateContainer} contentWrapperBase`}>
                         <input 
                             type="text"
+                            required
                             value={username}
                             onChange={(e) => setUsername(e.target.value)}
                         />
@@ -143,10 +143,11 @@ const Profile = () => {
                                     <img src={imageUrl} alt="Uploaded" style={{ maxWidth: '100%' }} />
                                     <p>URL: <a href={imageUrl} target="_blank">{imageUrl}</a></p>
                                 </div>
-                            ) : avatar ? (
+                            ) : decodedJwt.avatar ? (
                                 <div className={styles.uploadImgContainer}>
                                     <p>Your avatar:</p>
-                                    <img src={avatar} alt="Current image" />
+                                    <img src={decodedJwt.avatar} alt="Current image" />
+                                    <p>URL: <a href={decodedJwt.avatar} target="_blank">{decodedJwt.avatar}</a></p>
                                 </div>
                             ) : (
                                 <div className={styles.uploadImgContainer}>
@@ -180,7 +181,7 @@ const Profile = () => {
                 {isOpenDel && <div className={styles.overlay} onClick={toggleDeleteMessage}></div>}
 
                 {isErrMsg && <div className={`${styles.errMsgPopup} popupContainer`}>{errMsg}</div>}
-            </div>
+            </div> */}
         </>
     )
 }

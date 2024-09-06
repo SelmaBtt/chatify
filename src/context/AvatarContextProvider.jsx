@@ -29,10 +29,8 @@ const AvatarContextProvider = (props) => {
             const data = await response.json();
             const imageUrl = data.data.url;
             setImageUrl(imageUrl);
-            toast.success('Image uploaded successfully!');
         } catch (error) {
             console.error('Upload failed:', error);
-            toast.error('Upload failed: ' + error.toString());
         }
     };    
 
