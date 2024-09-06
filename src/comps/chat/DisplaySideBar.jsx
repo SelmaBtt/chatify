@@ -1,4 +1,4 @@
-import styles from '../../styles/Chat/Sidebar.module.css'
+import styles from '../../styles/chat/Sidebar.module.css'
 import { useContext } from 'react'
 import { LogInContext } from '../../context/LogInContextProvider'
 import { UsersContext } from '../../context/UsersContextProvider'
