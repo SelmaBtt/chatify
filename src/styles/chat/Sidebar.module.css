@@ -31,7 +31,7 @@
 
 .searchWindow{
     position: relative;
-    z-index: 1;
+    z-index: 2;
 }
 
 .searchWindow > svg{cursor: pointer;}
@@ -44,6 +44,7 @@
     padding: 0 5%;
 }
 
+.searchInput, .searchBtn, .searchWindow > svg, .displaySearchedWrapper{z-index: 3;}
 
 .searchBtn{
     position: absolute; 
@@ -68,6 +69,17 @@
 }
 .closedSearchWindow{
     display: none;
+}
+
+.overlay{
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 100vh;
+    width: 100vw;
 }
 
 .displaySearchedWrapper{

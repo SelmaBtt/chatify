@@ -7,6 +7,17 @@
     }
 }
 
+@keyframes blurAnimation{
+    0%{
+        background-color: rgba(0, 0, 0, 0);
+        backdrop-filter: blur(0px);
+    }
+    100%{
+        background-color: rgba(0, 0, 0, 0.3);
+        backdrop-filter: blur(1.5px);
+    }
+}
+
 .userWrapper{
     color: var(--font-color);
     display: flex;
@@ -31,14 +42,15 @@
 }
 
 .overlay{
-    background-color: black;
+    background-color: rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(2px);
+    animation: blurAnimation 0.6s ease-in-out forwards;
     top: 0;
     left: 0;
     right: 0;
     bottom: 0;
     height: 100vh;
     width: 100vw;
-    opacity: 30%;
     position: fixed;
     cursor: pointer;
     z-index: 1;
